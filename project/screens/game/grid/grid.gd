@@ -42,7 +42,6 @@ func initialize(inGame: GameScript):
 			tile.position.x += (tile_size * j)
 			tile.position.y += (tile_size * i)
 			
-			tile.grid_position = Vector2i(j, i)
 			current_tiles[i].append(tile)
 			
 			add_child(tile)
