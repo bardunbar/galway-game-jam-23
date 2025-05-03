@@ -19,7 +19,7 @@ var orientation: Vector2i = Vector2i(1, 0)
 
 signal action_points_changed(new_action_points: int)
 signal ready_to_blink
-signal action1_updated(is_active: bool, prompt_text: String)
+signal action1_updated(is_active: bool, prompt_text: String, cost: int)
 
 func _ready() -> void:
 	return
@@ -66,9 +66,10 @@ func processInput() -> void:
 				if possible_actions.size() > action_pressed:
 					var action = possible_actions[action_pressed - 1]
 					facing_tile.do_action(action)
-					
 					var action_cost = Actions.action_costs[action]
 					use_action_points(action_cost)
+					set_faced_tile_highlight(false)
+					curAction = ACTION_TYPE.ACTION
 					return
 			
 		var movementDirection: Vector2i = Vector2i.ZERO
@@ -103,8 +104,18 @@ func orientTo(newOrientation: Vector2):
 	
 func set_faced_tile_highlight(is_highlighted):
 	var faced_tile = get_facing_tile()
+	var has_action = false
 	if faced_tile != null:
 		faced_tile.highlight_tile(is_highlighted)
+		if is_highlighted:
+			var possible_actions = faced_tile.get_possible_actions() as Array[String]
+			if possible_actions.size() > 0:
+				var action = possible_actions[0]
+				var action_cost = Actions.action_costs[action]
+				action1_updated.emit(true, action, action_cost)
+				has_action = true
+	if !has_action:
+		action1_updated.emit(false, "", 0)
 
 func get_facing_tile():
 	var faced_tile_position = gridPosition + orientation
@@ -120,6 +131,11 @@ func processMovement(delta: float) -> void:
 			prevPosition = targetPosition
 			finish_action()
 	elif curAction == ACTION_TYPE.ROTATE:
+		movementAlpha += (delta * rotationSpeed)
+		movementAlpha = clamp(movementAlpha, 0, 1)
+		if movementAlpha >= 1:
+			finish_action()
+	elif curAction == ACTION_TYPE.ACTION:
 		movementAlpha += (delta * rotationSpeed)
 		movementAlpha = clamp(movementAlpha, 0, 1)
 		if movementAlpha >= 1:
