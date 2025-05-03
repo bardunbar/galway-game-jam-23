@@ -29,7 +29,15 @@ func _ready() -> void:
 	_do_ground_action()
 
 func get_possible_actions() -> Array[String]:
-	return Array()
+	var possible_actions: Array[String] = Array()
+	
+	if current_state == "toxic":
+		possible_actions.append("clean")
+	elif current_state == "ground":
+		possible_actions.append("water")
+		possible_actions.append("plant")
+	
+	return possible_actions
 	
 func highlight_tile(is_highlighted: bool):
 	if is_highlighted: 
