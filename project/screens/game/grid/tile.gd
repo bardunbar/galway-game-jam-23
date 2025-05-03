@@ -64,8 +64,8 @@ func get_possible_actions() -> Array:
 	elif current_state == TileGlobals.TILE_TYPE.GROUND:
 		possible_actions.append(TileGlobals.TILE_ACTION.DIG)
 	elif current_state == TileGlobals.TILE_TYPE.IRRIGATED:
-		possible_actions.append(TileGlobals.TILE_ACTION.PLANT)
 		possible_actions.append(TileGlobals.TILE_ACTION.DIG)
+		possible_actions.append(TileGlobals.TILE_ACTION.PLANT)
 	
 	return possible_actions
 	
@@ -101,9 +101,19 @@ func do_action(action_name: TileGlobals.TILE_ACTION) -> void:
 	elif (action_name == TileGlobals.TILE_ACTION.WATER):
 		_do_water_action()
 	elif (action_name == TileGlobals.TILE_ACTION.CLEAN):
-		_do_ground_action()
+		_do_clean_action()
 	elif (action_name == TileGlobals.TILE_ACTION.DIG):
 		do_dig_action()
+		
+func _do_clean_action():
+	_do_ground_action()
+	pending_actions.clear()
+	var diagonal_tiles: Array[Tile] = _get_diagonal_tiles()
+	for diagonal_tile in diagonal_tiles:
+		if diagonal_tile:
+			var toxic_index = diagonal_tile.pending_actions.find(TileGlobals.TILE_ACTION.TOXIC)
+			if toxic_index != -1:
+				diagonal_tile.pending_actions.remove_at(toxic_index)
 		
 func _do_ground_action():
 	current_state = TileGlobals.TILE_TYPE.GROUND
