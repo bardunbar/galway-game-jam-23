@@ -22,13 +22,18 @@ func _ready() -> void:
 	player.connect("action1_updated", _on_action1_updated)
 	player.initialize(self)
 	hud.update_action_points(action_points, action_points)
+	hud.on_mid_blink.connect(_on_mid_blink)
 	return
 
 func _on_action_points_changed(new_action_points: int):
 	hud.update_action_points(new_action_points, action_points)
+	if new_action_points == 0:
+		_on_ready_to_blink()
 
 func _on_ready_to_blink():
 	hud.play_fade_animation()
+	
+func _on_mid_blink():
 	grid.blink()
 
 func _on_action1_updated(is_active: bool, prompt_text: String, cost: int):

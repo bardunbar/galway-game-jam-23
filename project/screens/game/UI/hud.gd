@@ -7,6 +7,8 @@ extends Control
 @onready var action1_prompt:Label = $InterfaceLayer/Action1Container/Action1Prompt
 @onready var action1_cost:Label = $InterfaceLayer/Action1Container/Action1Cost
 
+signal on_mid_blink
+
 func update_action_points(cur_points: int, max_points: int):
 	action_points_label.text = str(cur_points, "/", max_points)
 	return
@@ -19,6 +21,8 @@ func update_action_1_prompt(is_active: bool, prompt_text: String, cost: int):
 	return
 	
 func play_fade_animation():
-
-	animation_player.play("blink")
-	return
+	if !animation_player.is_playing():
+		animation_player.play("blink")
+		
+func _emit_mid_blink():
+	emit_signal("on_mid_blink")
