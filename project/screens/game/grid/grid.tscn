@@ -1,13 +1,217 @@
-[gd_scene load_steps=4 format=3 uid="uid://dokrrfb2rfisg"]
+[gd_scene load_steps=3 format=3 uid="uid://dokrrfb2rfisg"]
 
 [ext_resource type="Script" uid="uid://54y7nga2oqwa" path="res://screens/game/grid/grid.gd" id="1_8cxsv"]
 [ext_resource type="PackedScene" uid="uid://hv7ajecc3s74" path="res://screens/game/grid/tile.tscn" id="1_250vr"]
-[ext_resource type="Script" uid="uid://defb5quso33t0" path="res://screens/game/grid/tile.gd" id="3_lbxbp"]
 
 [node name="Grid" type="Node2D"]
 script = ExtResource("1_8cxsv")
 tile_class = ExtResource("1_250vr")
 
-[node name="Tile" type="Node2D" parent="."]
-script = ExtResource("3_lbxbp")
-metadata/_custom_type_script = "uid://defb5quso33t0"
+[node name="Debug" type="Node2D" parent="."]
+
+[node name="Row" type="Node2D" parent="Debug"]
+
+[node name="Tile" parent="Debug/Row" instance=ExtResource("1_250vr")]
+
+[node name="Tile2" parent="Debug/Row" instance=ExtResource("1_250vr")]
+position = Vector2(64, 0)
+
+[node name="Tile3" parent="Debug/Row" instance=ExtResource("1_250vr")]
+position = Vector2(124, 0)
+
+[node name="Tile4" parent="Debug/Row" instance=ExtResource("1_250vr")]
+position = Vector2(188, 0)
+
+[node name="Tile5" parent="Debug/Row" instance=ExtResource("1_250vr")]
+position = Vector2(252, 0)
+
+[node name="Tile6" parent="Debug/Row" instance=ExtResource("1_250vr")]
+position = Vector2(317, 0)
+
+[node name="Tile7" parent="Debug/Row" instance=ExtResource("1_250vr")]
+position = Vector2(384, 0)
+
+[node name="Tile8" parent="Debug/Row" instance=ExtResource("1_250vr")]
+position = Vector2(447, 0)
+
+[node name="Row2" type="Node2D" parent="Debug"]
+position = Vector2(0, 64)
+
+[node name="Tile" parent="Debug/Row2" instance=ExtResource("1_250vr")]
+
+[node name="Tile2" parent="Debug/Row2" instance=ExtResource("1_250vr")]
+position = Vector2(64, 0)
+
+[node name="Tile3" parent="Debug/Row2" instance=ExtResource("1_250vr")]
+position = Vector2(124, 0)
+
+[node name="Tile4" parent="Debug/Row2" instance=ExtResource("1_250vr")]
+position = Vector2(188, 0)
+
+[node name="Tile5" parent="Debug/Row2" instance=ExtResource("1_250vr")]
+position = Vector2(252, 0)
+
+[node name="Tile6" parent="Debug/Row2" instance=ExtResource("1_250vr")]
+position = Vector2(317, 0)
+
+[node name="Tile7" parent="Debug/Row2" instance=ExtResource("1_250vr")]
+position = Vector2(384, 0)
+
+[node name="Tile8" parent="Debug/Row2" instance=ExtResource("1_250vr")]
+position = Vector2(447, 0)
+
+[node name="Row3" type="Node2D" parent="Debug"]
+position = Vector2(0, 123)
+
+[node name="Tile" parent="Debug/Row3" instance=ExtResource("1_250vr")]
+
+[node name="Tile2" parent="Debug/Row3" instance=ExtResource("1_250vr")]
+position = Vector2(64, 0)
+
+[node name="Tile3" parent="Debug/Row3" instance=ExtResource("1_250vr")]
+position = Vector2(124, 0)
+
+[node name="Tile4" parent="Debug/Row3" instance=ExtResource("1_250vr")]
+position = Vector2(188, 0)
+
+[node name="Tile5" parent="Debug/Row3" instance=ExtResource("1_250vr")]
+position = Vector2(252, 0)
+
+[node name="Tile6" parent="Debug/Row3" instance=ExtResource("1_250vr")]
+position = Vector2(317, 0)
+
+[node name="Tile7" parent="Debug/Row3" instance=ExtResource("1_250vr")]
+position = Vector2(384, 0)
+
+[node name="Tile8" parent="Debug/Row3" instance=ExtResource("1_250vr")]
+position = Vector2(447, 0)
+
+[node name="Row4" type="Node2D" parent="Debug"]
+position = Vector2(0, 185)
+
+[node name="Tile" parent="Debug/Row4" instance=ExtResource("1_250vr")]
+
+[node name="Tile2" parent="Debug/Row4" instance=ExtResource("1_250vr")]
+position = Vector2(64, 0)
+
+[node name="Tile3" parent="Debug/Row4" instance=ExtResource("1_250vr")]
+position = Vector2(124, 0)
+
+[node name="Tile4" parent="Debug/Row4" instance=ExtResource("1_250vr")]
+position = Vector2(188, 0)
+
+[node name="Tile5" parent="Debug/Row4" instance=ExtResource("1_250vr")]
+position = Vector2(252, 0)
+
+[node name="Tile6" parent="Debug/Row4" instance=ExtResource("1_250vr")]
+position = Vector2(317, 0)
+
+[node name="Tile7" parent="Debug/Row4" instance=ExtResource("1_250vr")]
+position = Vector2(384, 0)
+
+[node name="Tile8" parent="Debug/Row4" instance=ExtResource("1_250vr")]
+position = Vector2(447, 0)
+
+[node name="Row5" type="Node2D" parent="Debug"]
+position = Vector2(0, 247)
+
+[node name="Tile" parent="Debug/Row5" instance=ExtResource("1_250vr")]
+
+[node name="Tile2" parent="Debug/Row5" instance=ExtResource("1_250vr")]
+position = Vector2(64, 0)
+
+[node name="Tile3" parent="Debug/Row5" instance=ExtResource("1_250vr")]
+position = Vector2(124, 0)
+
+[node name="Tile4" parent="Debug/Row5" instance=ExtResource("1_250vr")]
+position = Vector2(188, 0)
+
+[node name="Tile5" parent="Debug/Row5" instance=ExtResource("1_250vr")]
+position = Vector2(252, 0)
+
+[node name="Tile6" parent="Debug/Row5" instance=ExtResource("1_250vr")]
+position = Vector2(317, 0)
+
+[node name="Tile7" parent="Debug/Row5" instance=ExtResource("1_250vr")]
+position = Vector2(384, 0)
+
+[node name="Tile8" parent="Debug/Row5" instance=ExtResource("1_250vr")]
+position = Vector2(447, 0)
+
+[node name="Row6" type="Node2D" parent="Debug"]
+position = Vector2(0, 312)
+
+[node name="Tile" parent="Debug/Row6" instance=ExtResource("1_250vr")]
+
+[node name="Tile2" parent="Debug/Row6" instance=ExtResource("1_250vr")]
+position = Vector2(64, 0)
+
+[node name="Tile3" parent="Debug/Row6" instance=ExtResource("1_250vr")]
+position = Vector2(124, 0)
+
+[node name="Tile4" parent="Debug/Row6" instance=ExtResource("1_250vr")]
+position = Vector2(188, 0)
+
+[node name="Tile5" parent="Debug/Row6" instance=ExtResource("1_250vr")]
+position = Vector2(252, 0)
+
+[node name="Tile6" parent="Debug/Row6" instance=ExtResource("1_250vr")]
+position = Vector2(317, 0)
+
+[node name="Tile7" parent="Debug/Row6" instance=ExtResource("1_250vr")]
+position = Vector2(384, 0)
+
+[node name="Tile8" parent="Debug/Row6" instance=ExtResource("1_250vr")]
+position = Vector2(447, 0)
+
+[node name="Row7" type="Node2D" parent="Debug"]
+position = Vector2(0, 376)
+
+[node name="Tile" parent="Debug/Row7" instance=ExtResource("1_250vr")]
+
+[node name="Tile2" parent="Debug/Row7" instance=ExtResource("1_250vr")]
+position = Vector2(64, 0)
+
+[node name="Tile3" parent="Debug/Row7" instance=ExtResource("1_250vr")]
+position = Vector2(124, 0)
+
+[node name="Tile4" parent="Debug/Row7" instance=ExtResource("1_250vr")]
+position = Vector2(188, 0)
+
+[node name="Tile5" parent="Debug/Row7" instance=ExtResource("1_250vr")]
+position = Vector2(252, 0)
+
+[node name="Tile6" parent="Debug/Row7" instance=ExtResource("1_250vr")]
+position = Vector2(317, 0)
+
+[node name="Tile7" parent="Debug/Row7" instance=ExtResource("1_250vr")]
+position = Vector2(384, 0)
+
+[node name="Tile8" parent="Debug/Row7" instance=ExtResource("1_250vr")]
+position = Vector2(447, 0)
+
+[node name="Row8" type="Node2D" parent="Debug"]
+position = Vector2(3, 439)
+
+[node name="Tile" parent="Debug/Row8" instance=ExtResource("1_250vr")]
+
+[node name="Tile2" parent="Debug/Row8" instance=ExtResource("1_250vr")]
+position = Vector2(64, 0)
+
+[node name="Tile3" parent="Debug/Row8" instance=ExtResource("1_250vr")]
+position = Vector2(124, 0)
+
+[node name="Tile4" parent="Debug/Row8" instance=ExtResource("1_250vr")]
+position = Vector2(188, 0)
+
+[node name="Tile5" parent="Debug/Row8" instance=ExtResource("1_250vr")]
+position = Vector2(252, 0)
+
+[node name="Tile6" parent="Debug/Row8" instance=ExtResource("1_250vr")]
+position = Vector2(317, 0)
+
+[node name="Tile7" parent="Debug/Row8" instance=ExtResource("1_250vr")]
+position = Vector2(384, 0)
+
+[node name="Tile8" parent="Debug/Row8" instance=ExtResource("1_250vr")]
+position = Vector2(447, 0)
