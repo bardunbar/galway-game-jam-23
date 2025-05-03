@@ -1,31 +1,70 @@
 class_name Tile
 extends Node2D
 
-@onready var current_texture: Sprite2D = $Sprite2D
+@onready var current_texture_component: Sprite2D = $CurrentTexture
+@onready var highlight_texture_component: Sprite2D = $HighlightTexture
 
 @export var ground_texture: Texture
 @export var water_texture: Texture
 @export var toxic_texture: Texture
+@export var highlight_texture: Texture 
+
+
+var grid: Grid
+var current_state: String
+var pending_actions: Array[String]
+
+func blink() -> void:	
+	if current_state == "plant":
+		if pending_actions.is_empty():
+			_do_plant_action()
+		elif pending_actions.find("toxic") > 0:
+			_do_toxic_action()
+		
+	pending_actions.clear()
 
 func _ready() -> void:
-	current_texture.texture = ground_texture
+	highlight_texture_component.texture = highlight_texture
+	highlight_tile(false)
+	_do_ground_action()
+
+func get_possible_actions() -> Array[String]:
+	return Array()
+	
+func highlight_tile(is_highlighted: bool):
+	if is_highlighted: 
+		highlight_texture_component.modulate.a = 1
+	else:
+		highlight_texture_component.modulate.a = 0
 
 func can_do_action(action_name: String) -> bool:
 	return true
 
 func do_action(action_name: String) -> void:
+	if !can_do_action(action_name):
+		return
+	
 	if (action_name == "ground"):
 		_do_ground_action()
+	elif (action_name == "plant"):
+		_do_plant_action()
 	elif (action_name == "water"):
 		_do_water_action()
 	elif (action_name == "toxic"):
 		_do_toxic_action()
 		
 func _do_ground_action():
-	current_texture.texture = ground_texture
+	current_state = "ground"
+	current_texture_component.texture = ground_texture
+	
+func _do_plant_action():
+	current_state = "plant"
+	pass
 	
 func _do_water_action():
-	current_texture.texture = water_texture
+	current_state = "water"
+	current_texture_component.texture = water_texture
 	
 func _do_toxic_action():
-	current_texture.texture = toxic_texture
+	current_state = "toxic"
+	current_texture_component.texture = toxic_texture

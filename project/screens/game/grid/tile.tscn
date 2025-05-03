@@ -10,7 +10,13 @@ script = ExtResource("1_6oxcn")
 ground_texture = ExtResource("2_xi6y3")
 water_texture = ExtResource("3_3sxbs")
 toxic_texture = ExtResource("4_ylbef")
+highlight_texture = ExtResource("3_3sxbs")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CurrentTexture" type="Sprite2D" parent="."]
 scale = Vector2(0.994417, 1)
 texture = ExtResource("2_xi6y3")
+
+[node name="HighlightTexture" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.994417, 1)
+texture = ExtResource("3_3sxbs")
