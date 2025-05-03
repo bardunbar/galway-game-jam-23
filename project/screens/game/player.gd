@@ -68,7 +68,6 @@ func processInput() -> void:
 				var possible_actions = facing_tile.get_possible_actions() as Array[TileGlobals.TILE_ACTION]
 				if possible_actions.size() >= action_pressed:
 					var action = possible_actions[action_pressed - 1]
-					print(str("doing action: ", TileGlobals.tile_action_information[action].cost))
 					facing_tile.do_action(action)
 					var action_cost = TileGlobals.tile_action_information[action].cost
 					use_action_points(action_cost)

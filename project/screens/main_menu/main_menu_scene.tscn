@@ -32,7 +32,7 @@ expand_mode = 4
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../PuzzleEditor")
 text = "Play Game"
 
 [node name="PuzzleEditor" type="Button" parent="MenuUI/CenterContainer/VBoxContainer"]
@@ -40,6 +40,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
 text = "Puzzle Editor
 "
 
@@ -47,5 +48,5 @@ text = "Puzzle Editor
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_top = NodePath("../PuzzleEditor")
 text = "Quit Game"

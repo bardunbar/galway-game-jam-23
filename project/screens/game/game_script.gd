@@ -8,6 +8,7 @@ extends Node2D
 @onready var grid:Grid = $Grid
 @onready var player:Player = $Player
 @onready var hud:HUD = $Hud
+@onready var camera:GameCamera = $Camera2D
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_open_play_menu"):
@@ -17,6 +18,7 @@ func _input(event: InputEvent) -> void:
 func _ready() -> void:
 	# Initialize the player and grid
 	grid.initialize(self)
+	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
 	player.connect("action_points_changed", _on_action_points_changed)
 	player.connect("ready_to_blink", _on_ready_to_blink)
 	player.connect("action1_updated", _on_action1_updated)

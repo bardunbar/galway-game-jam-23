@@ -50,17 +50,31 @@ func is_valid_tile_loc(x: int, y: int) -> bool:
 		
 func initialize(inGame: GameScript):
 	game = inGame
-	for i in range(grid_width):
-		current_tiles.append(Array())
+	build_grid(grid_width, grid_height)
 	
-	for i in range(grid_width):
-		for j in range(grid_height):
+func build_grid(width, height):
+	grid_width = width
+	grid_height = height
+	for i in range(height):
+		current_tiles.append(Array())
+		
+	position.x = -(width * tile_size)/2
+	position.y = -(height * tile_size)/2
+	
+	for i in range(height):
+		for j in range(width):
 			var tile: Tile = tile_class.instantiate() as Tile
-			tile.position = position
-			tile.position.x += (tile_size * j)
-			tile.position.y += (tile_size * i)
+			#tile.position = position
+			tile.position.x += (tile_size * (j + 0.5))
+			tile.position.y += (tile_size * (i + 0.5))
 			tile.grid_position = Vector2(j, i)
 			tile.grid = self
 			
 			current_tiles[i].append(tile)
 			add_child(tile)
+
+func get_grid_tile_width():
+	return grid_width * tile_size
+
+func get_grid_tile_height():
+	return grid_height * tile_size
