@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfnef885bvt5u"]
+[gd_scene load_steps=5 format=3 uid="uid://cfnef885bvt5u"]
 
 [ext_resource type="Script" uid="uid://cqdnoi24guymt" path="res://screens/game/game_script.gd" id="1_e6mtp"]
-[ext_resource type="Texture2D" uid="uid://ch2c0uus03qn6" path="res://assets/textures/godot_logo.png" id="1_wpo6x"]
 [ext_resource type="PackedScene" uid="uid://c4oy6yui5ffhj" path="res://screens/play_menu/play_menu_scene.tscn" id="2_jjnch"]
-[ext_resource type="Script" uid="uid://buy4c3xhcnogx" path="res://screens/game/twirl.gd" id="2_uald8"]
 [ext_resource type="Script" uid="uid://54y7nga2oqwa" path="res://screens/game/grid/grid.gd" id="5_b275y"]
 [ext_resource type="PackedScene" uid="uid://hv7ajecc3s74" path="res://screens/game/grid/tile.tscn" id="6_6vlqa"]
 
@@ -11,19 +9,10 @@
 script = ExtResource("1_e6mtp")
 play_menu = ExtResource("2_jjnch")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(587, 308)
-scale = Vector2(0.146484, 0.146484)
-texture = ExtResource("1_wpo6x")
-script = ExtResource("2_uald8")
-rate = 1.0
-
 [node name="Grid" type="Node2D" parent="."]
 position = Vector2(170, 49)
 script = ExtResource("5_b275y")
 tile_class = ExtResource("6_6vlqa")
-grid_width = 8
-grid_height = 8
 metadata/_custom_type_script = "uid://54y7nga2oqwa"
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
