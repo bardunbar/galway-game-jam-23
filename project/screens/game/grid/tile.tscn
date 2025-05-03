@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://hv7ajecc3s74"]
+[gd_scene load_steps=6 format=3 uid="uid://hv7ajecc3s74"]
 
 [ext_resource type="Script" uid="uid://defb5quso33t0" path="res://screens/game/grid/tile.gd" id="1_6oxcn"]
 [ext_resource type="Texture2D" uid="uid://ov17un2vb3t7" path="res://assets/textures/earth_placeholder_texture.png" id="2_xi6y3"]
 [ext_resource type="Texture2D" uid="uid://dltlvfkk1u64c" path="res://assets/textures/water_placeholder_texture.png" id="3_3sxbs"]
 [ext_resource type="Texture2D" uid="uid://bsabv8nsvw1q8" path="res://assets/textures/toxic_placeholder_texture.png" id="4_ylbef"]
+[ext_resource type="Texture2D" uid="uid://baha6cyrx3v11" path="res://assets/textures/TileHighlight.png" id="5_ylbef"]
 
 [node name="Tile" type="Node2D"]
 script = ExtResource("1_6oxcn")
 ground_texture = ExtResource("2_xi6y3")
 water_texture = ExtResource("3_3sxbs")
 toxic_texture = ExtResource("4_ylbef")
+highlight_texture = ExtResource("5_ylbef")
 
 [node name="CurrentTexture" type="Sprite2D" parent="."]
 scale = Vector2(0.994417, 1)

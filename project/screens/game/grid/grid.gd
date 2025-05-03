@@ -21,6 +21,8 @@ func blink() -> void:
 
 
 func get_tile(x: int, y: int) -> Tile:
+	if !is_valid_tile_loc(x, y):
+		return null
 	var row = current_tiles[y]
 	if (row):
 		return row[x]
@@ -35,6 +37,9 @@ func getStartingLocation() -> Vector2:
 	return get_tile(startingGridLocation.x, startingGridLocation.y).global_position
 	
 func canMove(x: int, y: int) -> bool:
+	return is_valid_tile_loc(x, y)
+	
+func is_valid_tile_loc(x: int, y: int) -> bool:
 	return x >= 0 and x < grid_width and y >= 0 and y < grid_height
 		
 func initialize(inGame: GameScript):

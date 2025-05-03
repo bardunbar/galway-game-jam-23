@@ -34,7 +34,7 @@ func initialize(inGame: GameScript):
 	
 	tile_size = game.grid.tile_size
 	curActionPoints = game.action_points
-	set_faced_tile_highlight()
+	set_faced_tile_highlight(true)
 	
 func use_action_points(count: int):
 	curActionPoints = max(curActionPoints - count, 0)
@@ -46,7 +46,7 @@ func finish_action():
 	if curActionPoints <= 0:
 		ready_to_blink.emit()
 	else:
-		set_faced_tile_highlight()
+		set_faced_tile_highlight(true)
 	
 func _process(delta: float) -> void:
 	processInput()
@@ -70,7 +70,7 @@ func processInput() -> void:
 			else:
 				var newGridPosition = gridPosition + movementDirection
 				if game.grid.canMove(newGridPosition.x, newGridPosition.y):
-					clear_faced_tile_highlight()
+					set_faced_tile_highlight(false)
 					use_action_points(1)
 					gridPosition = newGridPosition
 					targetPosition = game.grid.get_tile(newGridPosition.x, newGridPosition.y).global_position
@@ -80,16 +80,15 @@ func processInput() -> void:
 
 func orientTo(newOrientation: Vector2):
 	# TODO: rotate sprite
-	clear_faced_tile_highlight()
+	set_faced_tile_highlight(false)
 	orientation = newOrientation
 	curAction = ACTION_TYPE.ROTATE
 	return
 	
-func clear_faced_tile_highlight():
-	return
-	
-func set_faced_tile_highlight():
-	return
+func set_faced_tile_highlight(is_highlighted):
+	var faced_tile = get_facing_tile()
+	if faced_tile != null:
+		faced_tile.highlight_tile(is_highlighted)
 
 func get_facing_tile():
 	var faced_tile_position = gridPosition + orientation
