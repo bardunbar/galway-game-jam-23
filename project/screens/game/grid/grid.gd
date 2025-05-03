@@ -11,6 +11,14 @@ extends Node2D
 var game: GameScript
 var current_tiles: Array[Array]
 
+func make_random_toxic_tiles(num_tiles: int):
+	for i in range(num_tiles):
+		var random_x = randi_range(0, grid_width - 1)
+		var random_y = randi_range(0, grid_height - 1)
+		
+		var tile: Tile = get_tile(random_x, random_y)
+		tile.do_toxic_action()
+
 func blink() -> void:
 	for row in current_tiles:
 		for object in row:

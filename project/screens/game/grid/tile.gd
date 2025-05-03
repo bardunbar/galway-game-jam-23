@@ -21,7 +21,7 @@ func blink() -> void:
 	if current_state == TileGlobals.TILE_TYPE.SEED:
 		do_tree_action()
 		if pending_actions.find(TileGlobals.TILE_TYPE.TOXIC) != -1:
-			_do_toxic_action()
+			do_toxic_action()
 			
 	pending_actions.clear()
 
@@ -68,10 +68,7 @@ func do_action(action_name: TileGlobals.TILE_ACTION) -> void:
 	elif (action_name == TileGlobals.TILE_ACTION.WATER):
 		_do_water_action()
 	elif (action_name == TileGlobals.TILE_ACTION.CLEAN):
-		_do_clean_action()
-		
-func _do_clean_action():
-	pass
+		_do_ground_action()
 		
 func _do_ground_action():
 	current_state = TileGlobals.TILE_TYPE.GROUND
@@ -90,7 +87,7 @@ func _do_water_action():
 		if tile:
 			tile.do_irrigate_action()
 	
-func _do_toxic_action():
+func do_toxic_action():
 	current_state = TileGlobals.TILE_TYPE.TOXIC
 	current_texture_component.texture = toxic_texture
 	
@@ -99,7 +96,7 @@ func do_irrigate_action():
 		return
 	current_state = TileGlobals.TILE_TYPE.IRRIGATED
 	current_texture_component.texture = watered_ground_texture
-	
+		
 func do_tree_action():
 	current_state = TileGlobals.TILE_TYPE.TREE
 	current_texture_component.texture = tree_texture
