@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://hv7ajecc3s74"]
+
+[ext_resource type="Script" uid="uid://defb5quso33t0" path="res://screens/game/grid/tile.gd" id="1_6oxcn"]
+
+[sub_resource type="Gradient" id="Gradient_6oxcn"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xi6y3"]
+gradient = SubResource("Gradient_6oxcn")
+
+[node name="Tile" type="Node2D"]
+script = ExtResource("1_6oxcn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.994417, 1)
+texture = SubResource("GradientTexture2D_xi6y3")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dokrrfb2rfisg"]
+
+[ext_resource type="Script" uid="uid://54y7nga2oqwa" path="res://screens/game/grid/grid.gd" id="1_8cxsv"]
+[ext_resource type="PackedScene" uid="uid://hv7ajecc3s74" path="res://screens/game/grid/tile.tscn" id="1_250vr"]
+[ext_resource type="Script" uid="uid://defb5quso33t0" path="res://screens/game/grid/tile.gd" id="3_lbxbp"]
+
+[node name="Grid" type="Node2D"]
+script = ExtResource("1_8cxsv")
+tile_class = ExtResource("1_250vr")
+
+[node name="Tile" type="Node2D" parent="."]
+script = ExtResource("3_lbxbp")
+metadata/_custom_type_script = "uid://defb5quso33t0"
