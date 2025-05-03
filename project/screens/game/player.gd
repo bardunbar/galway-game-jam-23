@@ -114,12 +114,12 @@ func set_faced_tile_highlight(is_highlighted):
 		faced_tile.highlight_tile(is_highlighted)
 		if is_highlighted:
 			var possible_actions = faced_tile.get_possible_actions() as Array[TileGlobals.TILE_ACTION]
-			if possible_actions.size() == 1:
+			if possible_actions.size() >= 1:
 				var action_type = possible_actions[0]
 				var action_information = TileGlobals.tile_action_information[action_type]
 				action1_updated.emit(true, action_information.name, action_information.cost)
 				has_action_1 = true
-			if possible_actions.size() == 2:
+			if possible_actions.size() >= 2:
 				var action_type = possible_actions[1]
 				var action_information = TileGlobals.tile_action_information[action_type]
 				action2_updated.emit(true, action_information.name, action_information.cost)
