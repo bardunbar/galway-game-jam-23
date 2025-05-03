@@ -13,6 +13,7 @@ extends Node2D
 @export var highlight_texture: Texture 
 
 var grid: Grid
+var grid_position: Vector2 = Vector2.ZERO
 var current_state: String
 var pending_actions: Array[String]
 
@@ -60,6 +61,8 @@ func do_action(action_name: String) -> void:
 		_do_plant_action()
 	elif (action_name == "water"):
 		_do_water_action()
+	elif (action_name == "irrigate"):
+		_do_irrigate_action()
 	elif (action_name == "toxic"):
 		_do_toxic_action()
 		
@@ -75,6 +78,29 @@ func _do_water_action():
 	current_state = "water"
 	current_texture_component.texture = water_texture
 	
+	var surrounding_tiles: Array[Tile] = _get_surrounding_tiles()
+	for tile in surrounding_tiles:
+		if tile:
+			tile.do_action("irrigate")
+	
 func _do_toxic_action():
 	current_state = "toxic"
 	current_texture_component.texture = toxic_texture
+	
+func _do_irrigate_action():
+	current_state = "wet"
+	current_texture_component.texture = watered_ground_texture
+
+func _get_surrounding_tiles() -> Array[Tile]:
+	var surrounding_tiles: Array[Tile] = []
+	
+	surrounding_tiles.append(grid.get_tile(grid_position.x, grid_position.y + 1))
+	surrounding_tiles.append(grid.get_tile(grid_position.x, grid_position.y - 1))
+	surrounding_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y + 1))
+	surrounding_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y - 1))
+	surrounding_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y))
+	surrounding_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y))
+	surrounding_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y - 1))
+	surrounding_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y + 1))
+	
+	return surrounding_tiles
