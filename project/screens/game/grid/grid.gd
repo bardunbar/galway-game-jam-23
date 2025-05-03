@@ -16,7 +16,15 @@ func blink() -> void:
 		for object in row:
 			var tile: Tile = object as Tile
 			tile.blink()
-
+			
+func get_num_trees() -> int:
+	var num_trees: int = 0
+	for row in current_tiles:
+		for object in row:
+			var tile: Tile = object as Tile
+			if tile.current_state == TileGlobals.TILE_TYPE.TREE:
+				num_trees += 1		
+	return num_trees
 
 func get_tile(x: int, y: int) -> Tile:
 	if !is_valid_tile_loc(x, y):
