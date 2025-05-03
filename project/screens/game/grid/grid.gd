@@ -8,33 +8,29 @@ extends Node2D
 @export var grid_width: int = 8
 @export var grid_height: int = 8
 @export var tile_size: float = 64.0
-@export var startingLocation: Vector2 = Vector2(3, 3)
+@export var startingGridLocation: Vector2 = Vector2(3, 3)
 
 var game: GameScript
 var current_tiles: Array[Array]
 
-func get_tile(x: int, y: int):
+func get_tile(x: int, y: int) -> Tile:
 	var row = current_tiles[y]
 	if (row):
 		return row[x]
+	return null
 		
 func doAction(x: int, y: int):
 	return
 	
 func getStartingLocation() -> Vector2:
-	return startingLocation
+	return get_tile(startingGridLocation.x, startingGridLocation.y).global_position
 	
 func canMove(x: int, y: int) -> bool:
 	# TODO: check for tile type (i.e. tree/rock)
-	return get_tile(x, y)
+	return get_tile(x, y) != null
 		
 func initialize(inGame: GameScript):
 	game = inGame
-
-func _ready() -> void:
-	if debug_display:
-		debug_display.queue_free()
-	
 	for i in range(grid_width):
 		current_tiles.append(Array())
 	
@@ -48,3 +44,7 @@ func _ready() -> void:
 			current_tiles[i].append(tile)
 			
 			add_child(tile)
+
+func _ready() -> void:
+	if debug_display:
+		debug_display.queue_free()
