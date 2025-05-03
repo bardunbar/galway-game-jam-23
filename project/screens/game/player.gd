@@ -3,10 +3,13 @@ extends Node2D
 
 @onready var sprite:Sprite2D
 
+enum ACTION_TYPE {NONE, MOVE, ROTATE, ACTION}
+
 var game: GameScript
-var tile_size = 100
-var speed = 3
-var isMoving = false
+var tile_size
+var movementSpeed = 3
+var rotationSpeed = 6
+var curAction = ACTION_TYPE.NONE
 var movementAlpha: float = 0
 var gridPosition: Vector2i
 var targetPosition: Vector2
@@ -33,7 +36,7 @@ func _process(delta: float) -> void:
 	return
 	
 func processInput() -> void:
-	if not isMoving:
+	if (curAction == ACTION_TYPE.NONE):
 		var movementDirection: Vector2i = Vector2i.ZERO
 		if Input.is_action_pressed("move_right"):
 			movementDirection.x = 1
@@ -51,22 +54,29 @@ func processInput() -> void:
 				if game.grid.canMove(newGridPosition.x, newGridPosition.y):
 					gridPosition = newGridPosition
 					targetPosition = game.grid.get_tile(newGridPosition.x, newGridPosition.y).global_position
-					isMoving = true
+					curAction = ACTION_TYPE.MOVE
 					
 	return
 
 func orientTo(newOrientation: Vector2):
 	# TODO: rotate sprite
 	orientation = newOrientation
+	curAction = ACTION_TYPE.ROTATE
 	return
 	
 func processMovement(delta: float) -> void:
-	if isMoving:
-		movementAlpha += (delta * speed)
+	if curAction == ACTION_TYPE.MOVE:
+		movementAlpha += (delta * movementSpeed)
 		movementAlpha = clamp(movementAlpha, 0, 1)
 		var newLoc = ((targetPosition - prevPosition) * movementAlpha) + prevPosition
 		global_position = newLoc
 		if movementAlpha >= 1:
 			prevPosition = targetPosition
 			movementAlpha = 0
-			isMoving = false
+			curAction = ACTION_TYPE.NONE
+	elif curAction == ACTION_TYPE.ROTATE:
+		movementAlpha += (delta * rotationSpeed)
+		movementAlpha = clamp(movementAlpha, 0, 1)
+		if movementAlpha >= 1:
+			movementAlpha = 0
+			curAction = ACTION_TYPE.NONE
