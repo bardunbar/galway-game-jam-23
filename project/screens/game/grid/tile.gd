@@ -38,7 +38,10 @@ func get_possible_actions() -> Array:
 		possible_actions.append("clean")
 	elif current_state == "ground":
 		possible_actions.append("water")
+		possible_actions.append("plant")    
+	elif current_state == "wet":
 		possible_actions.append("plant")
+		possible_actions.append("water")
 	
 	return possible_actions
 	
@@ -72,7 +75,7 @@ func _do_ground_action():
 	
 func _do_plant_action():
 	current_state = "plant"
-	pass
+	current_texture_component.texture = seed_texture  
 	
 func _do_water_action():
 	current_state = "water"
