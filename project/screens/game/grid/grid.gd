@@ -11,6 +11,19 @@ extends Node2D
 var game: GameScript
 var current_tiles: Array[Array]
 
+func make_random_tiles(num_tiles: int, tile_action: TileGlobals.TILE_TYPE):
+	for i in range(num_tiles):
+		var random_x = randi_range(0, grid_width - 1)
+		var random_y = randi_range(0, grid_height - 1)
+		
+		var tile: Tile = get_tile(random_x, random_y)
+		if tile_action == TileGlobals.TILE_TYPE.TOXIC:
+			tile.do_toxic_action()
+		elif tile_action == TileGlobals.TILE_TYPE.WATER:
+			tile._do_water_action()
+		elif tile_action == TileGlobals.TILE_TYPE.ROCK:
+			tile.do_rock_action()
+
 func blink() -> void:
 	for row in current_tiles:
 		for object in row:
@@ -18,13 +31,21 @@ func blink() -> void:
 			tile.blink()
 			
 func get_num_trees() -> int:
-	var num_trees: int = 0
+	return get_tiles_of_type(TileGlobals.TILE_TYPE.TREE).size()
+	
+func get_num_toxic() -> int:
+	return get_tiles_of_type(TileGlobals.TILE_TYPE.TOXIC).size()
+	
+func get_tiles_of_type(tile_type: TileGlobals.TILE_TYPE):
+	var tiles: Array[Tile]
 	for row in current_tiles:
 		for object in row:
 			var tile: Tile = object as Tile
-			if tile.current_state == TileGlobals.TILE_TYPE.TREE:
-				num_trees += 1		
-	return num_trees
+			if tile.current_state == tile_type:
+				tiles.append(tile)
+				
+	return tiles
+	
 
 func get_tile(x: int, y: int) -> Tile:
 	if !is_valid_tile_loc(x, y):
@@ -43,7 +64,14 @@ func getStartingLocation() -> Vector2:
 	return get_tile(startingGridLocation.x, startingGridLocation.y).global_position
 	
 func canMove(x: int, y: int) -> bool:
-	return is_valid_tile_loc(x, y)
+	if !is_valid_tile_loc(x, y):
+		return false
+		
+	var tile: Tile = get_tile(x, y)
+	if tile.current_state == TileGlobals.TILE_TYPE.TREE || tile.current_state == TileGlobals.TILE_TYPE.ROCK:
+		return false
+	
+	return true
 	
 func is_valid_tile_loc(x: int, y: int) -> bool:
 	return x >= 0 and x < grid_width and y >= 0 and y < grid_height

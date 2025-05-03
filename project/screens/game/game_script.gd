@@ -26,6 +26,9 @@ func _ready() -> void:
 	player.initialize(self)
 	hud.update_action_points(action_points, action_points)
 	hud.on_mid_blink.connect(_on_mid_blink)
+	grid.make_random_tiles(3, TileGlobals.TILE_TYPE.TOXIC)
+	grid.make_random_tiles(1, TileGlobals.TILE_TYPE.WATER)
+	grid.make_random_tiles(3, TileGlobals.TILE_TYPE.ROCK)
 	return
 
 func _on_action_points_changed(new_action_points: int):
