@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 TileGlobals="*res://screens/game/globals/tile_globals.gd"
+AudioGlobals="*res://screens/game/globals/audio_globals.gd"
 
 [dotnet]
 
