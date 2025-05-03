@@ -19,6 +19,7 @@ var orientation: Vector2i = Vector2i(1, 0)
 
 signal action_points_changed(new_action_points: int)
 signal ready_to_blink
+signal action1_updated(is_active: bool, prompt_text: String)
 
 func _ready() -> void:
 	return

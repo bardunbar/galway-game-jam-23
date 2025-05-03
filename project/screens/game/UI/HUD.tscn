@@ -2,21 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dgimsfcu1ush7" path="res://screens/game/UI/hud.gd" id="1_uiap5"]
 
-[sub_resource type="Animation" id="Animation_uiap5"]
-resource_name = "blink"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Fade:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.4, 0.666667, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_vlq7e"]
 length = 0.001
 tracks/0/type = "value"
@@ -30,6 +15,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uiap5"]
+resource_name = "blink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.4, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_74e8q"]
@@ -50,19 +50,37 @@ script = ExtResource("1_uiap5")
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InterfaceLayer"]
+[node name="ActionPointsContainer" type="HBoxContainer" parent="InterfaceLayer"]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 180.0
 offset_bottom = 45.0
 
-[node name="ActionPointsTitle" type="Label" parent="InterfaceLayer/HBoxContainer"]
+[node name="ActionPointsTitle" type="Label" parent="InterfaceLayer/ActionPointsContainer"]
 layout_mode = 2
 text = "BATTERY: "
 
-[node name="ActionPointsValue" type="Label" parent="InterfaceLayer/HBoxContainer"]
+[node name="ActionPointsValue" type="Label" parent="InterfaceLayer/ActionPointsContainer"]
 layout_mode = 2
 text = "10"
+
+[node name="Action1Container" type="HBoxContainer" parent="InterfaceLayer"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 180.0
+offset_bottom = 45.0
+
+[node name="Action1Input" type="Label" parent="InterfaceLayer/Action1Container"]
+layout_mode = 2
+text = "BATTERY: "
+
+[node name="Action1Prompt" type="Label" parent="InterfaceLayer/Action1Container"]
+layout_mode = 2
+text = "10"
+
+[node name="CenterContainer" type="CenterContainer" parent="InterfaceLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Fade" type="ColorRect" parent="."]
 layout_mode = 1
