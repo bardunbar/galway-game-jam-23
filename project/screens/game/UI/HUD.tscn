@@ -7,7 +7,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BlinkNode/TopEyelid:position")
+tracks/0/path = NodePath("InterfaceLayer/BlinkNode/TopEyelid:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -19,7 +19,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BlinkNode/BottomEyelid:position")
+tracks/1/path = NodePath("InterfaceLayer/BlinkNode/BottomEyelid:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -35,7 +35,7 @@ length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BlinkNode/TopEyelid:position")
+tracks/0/path = NodePath("InterfaceLayer/BlinkNode/TopEyelid:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -47,7 +47,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BlinkNode/BottomEyelid:position")
+tracks/1/path = NodePath("InterfaceLayer/BlinkNode/BottomEyelid:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -90,35 +90,6 @@ script = ExtResource("1_uiap5")
 libraries = {
 &"": SubResource("AnimationLibrary_74e8q")
 }
-
-[node name="BlinkNode" type="Control" parent="."]
-anchors_preset = 0
-offset_left = -266.0
-offset_top = -354.0
-offset_right = 1388.0
-offset_bottom = 294.0
-
-[node name="TopEyelid" type="ColorRect" parent="BlinkNode"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -300.0
-offset_bottom = -300.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="BottomEyelid" type="ColorRect" parent="BlinkNode"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 1000.0
-offset_bottom = 1000.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -224,3 +195,33 @@ text = "Oxygen: "
 unique_name_in_owner = true
 layout_mode = 2
 text = "0%"
+
+[node name="BlinkNode" type="Control" parent="InterfaceLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -266.0
+offset_top = -354.0
+offset_right = 1388.0
+offset_bottom = 294.0
+
+[node name="TopEyelid" type="ColorRect" parent="InterfaceLayer/BlinkNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+offset_bottom = -300.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BottomEyelid" type="ColorRect" parent="InterfaceLayer/BlinkNode"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1000.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
