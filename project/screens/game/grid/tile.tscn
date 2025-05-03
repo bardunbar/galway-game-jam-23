@@ -10,7 +10,6 @@ script = ExtResource("1_6oxcn")
 ground_texture = ExtResource("2_xi6y3")
 water_texture = ExtResource("3_3sxbs")
 toxic_texture = ExtResource("4_ylbef")
-highlight_texture = ExtResource("3_3sxbs")
 
 [node name="CurrentTexture" type="Sprite2D" parent="."]
 scale = Vector2(0.994417, 1)
