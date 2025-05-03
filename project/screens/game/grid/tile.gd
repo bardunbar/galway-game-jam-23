@@ -14,17 +14,18 @@ extends Node2D
 
 var grid: Grid
 var grid_position: Vector2 = Vector2.ZERO
-var current_state: String
-var pending_actions: Array[String]
+var current_state: TileGlobals.TILE_TYPE
+var pending_actions: Array[TileGlobals.TILE_ACTION]
 
 func blink() -> void:	
-	if current_state == "plant":
-		if pending_actions.is_empty():
-			_do_plant_action()
-		elif pending_actions.find("toxic") > 0:
-			_do_toxic_action()
-		
-	pending_actions.clear()
+	#if current_state == "plant":
+		#if pending_actions.is_empty():
+			#_do_plant_action()
+		#elif pending_actions.find("toxic") > 0:
+			#_do_toxic_action()
+		#
+	#pending_actions.clear()
+	pass
 
 func _ready() -> void:
 	highlight_texture_component.texture = highlight_texture
@@ -34,14 +35,12 @@ func _ready() -> void:
 func get_possible_actions() -> Array:
 	var possible_actions = []
 	
-	if current_state == "toxic":
-		possible_actions.append("clean")
-	elif current_state == "ground":
-		possible_actions.append("water")
-		possible_actions.append("plant")    
-	elif current_state == "wet":
-		possible_actions.append("plant")
-		possible_actions.append("water")
+	if current_state == TileGlobals.TILE_TYPE.TOXIC:
+		possible_actions.append(TileGlobals.TILE_ACTION.CLEAN)
+	elif current_state == TileGlobals.TILE_TYPE.GROUND:
+		possible_actions.append(TileGlobals.TILE_ACTION.WATER)  
+	elif current_state == TileGlobals.TILE_TYPE.IRRIGATED:
+		possible_actions.append(TileGlobals.TILE_ACTION.PLANT)
 	
 	return possible_actions
 	
@@ -51,47 +50,45 @@ func highlight_tile(is_highlighted: bool):
 	else:
 		highlight_texture_component.modulate.a = 0
 
-func can_do_action(action_name: String) -> bool:
+func can_do_action(action_name: TileGlobals.TILE_ACTION) -> bool:	
 	return true
 
-func do_action(action_name: String) -> void:
+func do_action(action_name: TileGlobals.TILE_ACTION) -> void:
 	if !can_do_action(action_name):
 		return
-	
-	if (action_name == "ground"):
-		_do_ground_action()
-	elif (action_name == "plant"):
+	elif (action_name == TileGlobals.TILE_ACTION.PLANT):
 		_do_plant_action()
-	elif (action_name == "water"):
+	elif (action_name == TileGlobals.TILE_ACTION.WATER):
 		_do_water_action()
-	elif (action_name == "irrigate"):
-		_do_irrigate_action()
-	elif (action_name == "toxic"):
-		_do_toxic_action()
+	elif (action_name == TileGlobals.TILE_ACTION.CLEAN):
+		_do_clean_action()
+		
+func _do_clean_action():
+	pass
 		
 func _do_ground_action():
-	current_state = "ground"
+	current_state = TileGlobals.TILE_TYPE.GROUND
 	current_texture_component.texture = ground_texture
 	
 func _do_plant_action():
-	current_state = "plant"
+	current_state = TileGlobals.TILE_TYPE.SEED
 	current_texture_component.texture = seed_texture  
 	
 func _do_water_action():
-	current_state = "water"
+	current_state = TileGlobals.TILE_TYPE.WATER
 	current_texture_component.texture = water_texture
 	
 	var surrounding_tiles: Array[Tile] = _get_surrounding_tiles()
 	for tile in surrounding_tiles:
 		if tile:
-			tile.do_action("irrigate")
+			tile.do_irrigate_action()
 	
 func _do_toxic_action():
-	current_state = "toxic"
+	current_state = TileGlobals.TILE_TYPE.TOXIC
 	current_texture_component.texture = toxic_texture
 	
-func _do_irrigate_action():
-	current_state = "wet"
+func do_irrigate_action():
+	current_state = TileGlobals.TILE_TYPE.IRRIGATED
 	current_texture_component.texture = watered_ground_texture
 
 func _get_surrounding_tiles() -> Array[Tile]:

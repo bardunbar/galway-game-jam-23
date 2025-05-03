@@ -26,7 +26,7 @@ func get_tile(x: int, y: int) -> Tile:
 		return row[x]
 	return null
 		
-func doAction(x: int, y: int, action_name: String):
+func doAction(x: int, y: int, action_name: TileGlobals.TILE_ACTION):
 	var tile: Tile = get_tile(x, y)
 	if tile and tile.can_do_action(action_name):
 		tile.do_action(action_name)

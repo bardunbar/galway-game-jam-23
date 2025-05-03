@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Actions="*res://screens/game/actions.gd"
+TileGlobals="*res://screens/game/globals/tile_globals.gd"
 
 [dotnet]
 
