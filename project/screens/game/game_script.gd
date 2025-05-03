@@ -35,6 +35,8 @@ func _on_ready_to_blink():
 	hud.play_fade_animation()
 	
 func _on_mid_blink():
+	player.curActionPoints = action_points
+	hud.update_action_points(action_points, action_points)
 	grid.blink()
 
 func _on_action1_updated(is_active: bool, prompt_text: String, cost: int):
