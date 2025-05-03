@@ -65,6 +65,9 @@ func processInput() -> void:
 				if possible_actions.size() > action_pressed:
 					var action = possible_actions[action_pressed - 1]
 					facing_tile.do_action(action)
+					
+					var action_cost = Actions.action_costs[action]
+					use_action_points(action_cost)
 					return
 			
 		var movementDirection: Vector2i = Vector2i.ZERO

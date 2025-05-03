@@ -7,8 +7,10 @@ extends Node2D
 @export var ground_texture: Texture
 @export var water_texture: Texture
 @export var toxic_texture: Texture
+@export var watered_ground_texture: Texture
+@export var seed_texture: Texture
+@export var tree_texture: Texture
 @export var highlight_texture: Texture 
-
 
 var grid: Grid
 var current_state: String
