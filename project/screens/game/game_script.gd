@@ -19,7 +19,7 @@ func _ready() -> void:
 	grid.initialize(self)
 	player.initialize(self)
 	player.connect("action_points_changed", _on_action_points_changed)
-	player.connect("ready_to_blink", _on_ready_to_blink)
+	player.connect("readsy_to_blink", _on_ready_to_blink)
 	hud.update_action_points(action_points, action_points)
 	return
 
