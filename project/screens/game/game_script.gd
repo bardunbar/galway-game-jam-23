@@ -27,12 +27,17 @@ func _ready() -> void:
 	grid.make_random_tiles(3, TileGlobals.TILE_TYPE.TOXIC)
 	grid.make_random_tiles(1, TileGlobals.TILE_TYPE.WATER)
 	grid.make_random_tiles(3, TileGlobals.TILE_TYPE.ROCK)
+	grid.connect("oxygen_updated", _on_oxygen_updated)
+	grid.update_oxygen_level()
 	return
 
 func _on_action_points_changed(new_action_points: int):
 	hud.update_action_points(new_action_points, action_points)
 	if new_action_points == 0:
 		_on_ready_to_blink()
+
+func _on_oxygen_updated(new_oxygen_level: float) -> void:
+	hud.update_oxygen(new_oxygen_level)
 
 func _on_ready_to_blink():
 	hud.play_fade_animation()

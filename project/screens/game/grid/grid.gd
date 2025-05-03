@@ -10,6 +10,9 @@ extends Node2D
 
 var game: GameScript
 var current_tiles: Array[Array]
+var oxygen_level: float = 0.0
+
+signal oxygen_updated(new_oxygen_level: float)
 
 func make_random_tiles(num_tiles: int, tile_action: TileGlobals.TILE_TYPE):
 	for i in range(num_tiles):
@@ -24,12 +27,26 @@ func make_random_tiles(num_tiles: int, tile_action: TileGlobals.TILE_TYPE):
 		elif tile_action == TileGlobals.TILE_TYPE.ROCK:
 			tile.do_rock_action()
 
+func update_oxygen_level() -> float:
+	var current_oxygen: float = 0.0
+	for row in current_tiles:
+		for object in row:
+			var tile: Tile = object as Tile
+			if TileGlobals.tile_oxygen_scores.has(tile.current_state):
+				current_oxygen += TileGlobals.tile_oxygen_scores[tile.current_state]
+	oxygen_level = current_oxygen
+	oxygen_updated.emit(oxygen_level)
+	return current_oxygen
+
 func blink() -> void:
 	for row in current_tiles:
 		for object in row:
 			var tile: Tile = object as Tile
 			tile.blink()
 			
+	update_oxygen_level()
+
+
 func get_num_trees() -> int:
 	return get_tiles_of_type(TileGlobals.TILE_TYPE.TREE).size()
 	
@@ -61,7 +78,7 @@ func doAction(x: int, y: int, action_name: TileGlobals.TILE_ACTION):
 		tile.do_action(action_name)
 	
 func getStartingLocation() -> Vector2:
-	return get_tile(startingGridLocation.x, startingGridLocation.y).global_position
+	return get_tile(int(startingGridLocation.x), int(startingGridLocation.y)).global_position
 	
 func canMove(x: int, y: int) -> bool:
 	if !is_valid_tile_loc(x, y):

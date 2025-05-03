@@ -2,6 +2,7 @@ class_name HUD
 extends Control
 
 @onready var action_points_label:Label = $InterfaceLayer/ActionPointsContainer/ActionPointsValue
+@onready var oxygen_value_label:Label = $InterfaceLayer/ScoresContainer/OxygenContainer/OxygenValue
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var action1_container:HBoxContainer = $InterfaceLayer/Prompts/Action1Container
 @onready var action1_prompt:Label = $InterfaceLayer/Prompts/Action1Container/Action1Prompt
@@ -15,6 +16,9 @@ signal on_mid_blink
 func update_action_points(cur_points: int, max_points: int):
 	action_points_label.text = str(cur_points, "/", max_points)
 	return
+	
+func update_oxygen(cur_oxygen: float) -> void:
+	oxygen_value_label.text = "%.2f%%" % cur_oxygen
 	
 func update_action_1_prompt(is_active: bool, prompt_text: String, cost: int):
 	action1_container.visible = is_active

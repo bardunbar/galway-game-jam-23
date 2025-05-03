@@ -34,3 +34,7 @@ var tile_action_information: Dictionary[TILE_ACTION, TileActionInformation] = {
 	TILE_ACTION.PLANT: TileActionInformation.new("plant", 2),
 	TILE_ACTION.DIG: TileActionInformation.new("dig", 2),
 }
+
+var tile_oxygen_scores: Dictionary[TILE_TYPE, float] = {
+	TILE_TYPE.TREE: 1.0,
+}
