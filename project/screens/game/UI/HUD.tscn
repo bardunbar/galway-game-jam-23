@@ -2,6 +2,33 @@
 
 [ext_resource type="Script" uid="uid://dgimsfcu1ush7" path="res://screens/game/UI/hud.gd" id="1_uiap5"]
 
+[sub_resource type="Animation" id="Animation_vlq7e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlinkNode/TopEyelid:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -300)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlinkNode/BottomEyelid:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1000)]
+}
+
 [sub_resource type="Animation" id="Animation_uiap5"]
 resource_name = "blink"
 length = 0.8
@@ -42,33 +69,6 @@ tracks/2/keys = {
 "args": [],
 "method": &"_emit_mid_blink"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_vlq7e"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BlinkNode/TopEyelid:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -300)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BlinkNode/BottomEyelid:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 1000)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_74e8q"]
@@ -137,36 +137,56 @@ text = "BATTERY: "
 layout_mode = 2
 text = "10"
 
-[node name="Action1Container" type="HBoxContainer" parent="InterfaceLayer"]
-visible = false
+[node name="Prompts" type="HBoxContainer" parent="InterfaceLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -82.0
-offset_top = -64.0
-offset_right = 82.0
-offset_bottom = -39.0
+offset_left = -575.0
+offset_top = -71.0
+offset_right = 576.0
+offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 
-[node name="Action1Input" type="Label" parent="InterfaceLayer/Action1Container"]
+[node name="Action1Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
+layout_mode = 2
+
+[node name="Action1Input" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
 layout_mode = 2
 text = "[SPACE]"
 
-[node name="Action1Prompt" type="Label" parent="InterfaceLayer/Action1Container"]
+[node name="Action1Prompt" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
 layout_mode = 2
 text = "10"
 
-[node name="Action1CostText" type="Label" parent="InterfaceLayer/Action1Container"]
+[node name="Action1CostText" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
 layout_mode = 2
 text = "    BATTERY:"
 
-[node name="Action1Cost" type="Label" parent="InterfaceLayer/Action1Container"]
+[node name="Action1Cost" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
 layout_mode = 2
 text = "10"
 
-[node name="CenterContainer" type="CenterContainer" parent="InterfaceLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Action2Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
+layout_mode = 2
+
+[node name="Action2Input" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+text = "     [CTRL]"
+
+[node name="Action2Prompt" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+text = "10"
+
+[node name="Action2CostText" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+text = "    BATTERY:"
+
+[node name="Action2Cost" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+text = "10"

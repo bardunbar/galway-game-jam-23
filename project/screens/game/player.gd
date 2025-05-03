@@ -20,6 +20,7 @@ var orientation: Vector2i = Vector2i(1, 0)
 signal action_points_changed(new_action_points: int)
 signal ready_to_blink
 signal action1_updated(is_active: bool, prompt_text: String, cost: int)
+signal action2_updated(is_active: bool, prompt_text: String, cost: int)
 
 func _ready() -> void:
 	return
@@ -59,12 +60,15 @@ func processInput() -> void:
 		var action_pressed = 0
 		if Input.is_action_just_pressed("Action_1"):
 			action_pressed = 1
+		if Input.is_action_just_pressed("Action_2"):
+			action_pressed = 2
 		if action_pressed > 0:
 			var facing_tile = get_facing_tile()
 			if facing_tile != null:
 				var possible_actions = facing_tile.get_possible_actions() as Array[String]
-				if possible_actions.size() > action_pressed:
+				if possible_actions.size() >= action_pressed:
 					var action = possible_actions[action_pressed - 1]
+					print(str("doing action: ", action))
 					facing_tile.do_action(action)
 					var action_cost = Actions.action_costs[action]
 					use_action_points(action_cost)
@@ -104,7 +108,8 @@ func orientTo(newOrientation: Vector2):
 	
 func set_faced_tile_highlight(is_highlighted):
 	var faced_tile = get_facing_tile()
-	var has_action = false
+	var has_action_1 = false
+	var has_action_2 = false
 	if faced_tile != null:
 		faced_tile.highlight_tile(is_highlighted)
 		if is_highlighted:
@@ -113,9 +118,16 @@ func set_faced_tile_highlight(is_highlighted):
 				var action = possible_actions[0]
 				var action_cost = Actions.action_costs[action]
 				action1_updated.emit(true, action, action_cost)
-				has_action = true
-	if !has_action:
+				has_action_1 = true
+			if possible_actions.size() > 1:
+				var action = possible_actions[1]
+				var action_cost = Actions.action_costs[action]
+				action2_updated.emit(true, action, action_cost)
+				has_action_2 = true
+	if !has_action_1:
 		action1_updated.emit(false, "", 0)
+	if !has_action_2:
+		action2_updated.emit(false, "", 0)
 
 func get_facing_tile():
 	var faced_tile_position = gridPosition + orientation
