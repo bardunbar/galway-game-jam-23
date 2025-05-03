@@ -51,7 +51,14 @@ func getStartingLocation() -> Vector2:
 	return get_tile(startingGridLocation.x, startingGridLocation.y).global_position
 	
 func canMove(x: int, y: int) -> bool:
-	return is_valid_tile_loc(x, y)
+	if !is_valid_tile_loc(x, y):
+		return false
+		
+	var tile: Tile = get_tile(x, y)
+	if tile.current_state == TileGlobals.TILE_TYPE.TREE:
+		return false
+	
+	return true
 	
 func is_valid_tile_loc(x: int, y: int) -> bool:
 	return x >= 0 and x < grid_width and y >= 0 and y < grid_height
