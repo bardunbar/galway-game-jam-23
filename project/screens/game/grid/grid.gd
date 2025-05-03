@@ -19,8 +19,10 @@ func get_tile(x: int, y: int) -> Tile:
 		return row[x]
 	return null
 		
-func doAction(x: int, y: int):
-	return
+func doAction(x: int, y: int, action_name: String):
+	var tile: Tile = get_tile(x, y)
+	if tile and tile.can_do_action(action_name):
+		tile.do_action(action_name)
 	
 func getStartingLocation() -> Vector2:
 	return get_tile(startingGridLocation.x, startingGridLocation.y).global_position

@@ -9,7 +9,10 @@ extends Node2D
 
 func _ready() -> void:
 	current_texture.texture = ground_texture
-	
+
+func can_do_action(action_name: String) -> bool:
+	return true
+
 func do_action(action_name: String) -> void:
 	if (action_name == "ground"):
 		_do_ground_action()
