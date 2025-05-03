@@ -28,8 +28,7 @@ func getStartingLocation() -> Vector2:
 	return get_tile(startingGridLocation.x, startingGridLocation.y).global_position
 	
 func canMove(x: int, y: int) -> bool:
-	# TODO: check for tile type (i.e. tree/rock)
-	return get_tile(x, y) != null
+	return x >= 0 and x < grid_width and y >= 0 and y < grid_height
 		
 func initialize(inGame: GameScript):
 	game = inGame
@@ -43,6 +42,7 @@ func initialize(inGame: GameScript):
 			tile.position.x += (tile_size * j)
 			tile.position.y += (tile_size * i)
 			
+			tile.grid_position = Vector2i(j, i)
 			current_tiles[i].append(tile)
 			
 			add_child(tile)
