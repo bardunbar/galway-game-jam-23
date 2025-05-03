@@ -49,6 +49,15 @@ func highlight_tile(is_highlighted: bool):
 		highlight_texture_component.modulate.a = 0
 
 func can_do_action(action_name: TileGlobals.TILE_ACTION) -> bool:	
+	if action_name == TileGlobals.TILE_ACTION.WATER:
+		return current_state != TileGlobals.TILE_TYPE.SEED or current_state != TileGlobals.TILE_TYPE.TREE
+		
+	if action_name == TileGlobals.TILE_ACTION.PLANT:
+		return current_state == TileGlobals.TILE_TYPE.IRRIGATED
+		
+	if action_name == TileGlobals.TILE_ACTION.CLEAN:
+		return current_state == TileGlobals.TILE_TYPE.TOXIC
+		
 	return true
 
 func do_action(action_name: TileGlobals.TILE_ACTION) -> void:
@@ -86,6 +95,8 @@ func _do_toxic_action():
 	current_texture_component.texture = toxic_texture
 	
 func do_irrigate_action():
+	if current_state != TileGlobals.TILE_TYPE.GROUND:
+		return
 	current_state = TileGlobals.TILE_TYPE.IRRIGATED
 	current_texture_component.texture = watered_ground_texture
 	
