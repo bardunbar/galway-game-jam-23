@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7htpu5jt4t3"]
+
+[ext_resource type="Texture2D" uid="uid://ch2c0uus03qn6" path="res://assets/textures/godot_logo.png" id="1_24xae"]
+
+[node name="Player" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_24xae")

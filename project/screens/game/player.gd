@@ -1,5 +1,7 @@
+class_name Player
 extends Node2D
 
+var game: GameScript
 var gridSize = 100
 var speed = 3
 var isMoving = false
@@ -13,6 +15,9 @@ func _ready() -> void:
 	targetPosition = global_position
 	prevPosition = global_position
 	return
+	
+func initialize(inGame: GameScript):
+	game = inGame
 	
 func _process(delta: float) -> void:
 	processInput()
