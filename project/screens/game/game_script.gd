@@ -27,5 +27,5 @@ func _on_action_points_changed(new_action_points: int):
 	hud.update_action_points(new_action_points, action_points)
 
 func _on_ready_to_blink():
-	print("Ready to blink")
-	return
+	hud.play_fade_animation()
+	grid.blink()
