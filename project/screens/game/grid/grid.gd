@@ -1,8 +1,6 @@
 class_name Grid
 extends Node2D
 
-@onready var debug_display: Node2D = $Debug
-
 @export var tile_class: PackedScene
 
 @export var grid_width: int = 8
@@ -58,7 +56,3 @@ func initialize(inGame: GameScript):
 			
 			current_tiles[i].append(tile)
 			add_child(tile)
-
-func _ready() -> void:
-	if debug_display:
-		debug_display.queue_free()
