@@ -13,6 +13,13 @@ extends Node2D
 var game: GameScript
 var current_tiles: Array[Array]
 
+func blink() -> void:
+	for row in current_tiles:
+		for object in row:
+			var tile: Tile = object as Tile
+			tile.blink()
+
+
 func get_tile(x: int, y: int) -> Tile:
 	var row = current_tiles[y]
 	if (row):
@@ -41,9 +48,9 @@ func initialize(inGame: GameScript):
 			tile.position = position
 			tile.position.x += (tile_size * j)
 			tile.position.y += (tile_size * i)
+			tile.grid = self
 			
 			current_tiles[i].append(tile)
-			
 			add_child(tile)
 
 func _ready() -> void:
