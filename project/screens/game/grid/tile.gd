@@ -167,18 +167,18 @@ func do_rock_action():
 	
 func _get_cardinal_tiles() -> Array[Tile]:
 	var cardinal_tiles: Array[Tile] = []
-	cardinal_tiles.append(grid.get_tile(grid_position.x, grid_position.y + 1))
-	cardinal_tiles.append(grid.get_tile(grid_position.x, grid_position.y - 1))
-	cardinal_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y))
-	cardinal_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y))
+	cardinal_tiles.append(grid.get_tile(int(grid_position.x), int(grid_position.y + 1)))
+	cardinal_tiles.append(grid.get_tile(int(grid_position.x), int(grid_position.y - 1)))
+	cardinal_tiles.append(grid.get_tile(int(grid_position.x + 1), int(grid_position.y)))
+	cardinal_tiles.append(grid.get_tile(int(grid_position.x - 1), int(grid_position.y)))
 
 	return cardinal_tiles
 
 func _get_diagonal_tiles() -> Array[Tile]:
 	var diagonal_tiles: Array[Tile] = []
-	diagonal_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y + 1))
-	diagonal_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y - 1))
-	diagonal_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y - 1))
-	diagonal_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y + 1))
+	diagonal_tiles.append(grid.get_tile(int(grid_position.x + 1), int(grid_position.y + 1)))
+	diagonal_tiles.append(grid.get_tile(int(grid_position.x - 1), int(grid_position.y - 1)))
+	diagonal_tiles.append(grid.get_tile(int(grid_position.x + 1), int(grid_position.y - 1)))
+	diagonal_tiles.append(grid.get_tile(int(grid_position.x - 1), int(grid_position.y + 1)))
 	
 	return diagonal_tiles
