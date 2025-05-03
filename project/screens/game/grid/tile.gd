@@ -10,6 +10,8 @@ extends Node2D
 @export var watered_ground_texture: Texture
 @export var seed_texture: Texture
 @export var tree_texture: Texture
+@export var hole_texture: Texture
+@export var rock_texture: Texture
 @export var highlight_texture: Texture 
 
 var grid: Grid
@@ -18,12 +20,36 @@ var current_state: TileGlobals.TILE_TYPE
 var pending_actions: Array[TileGlobals.TILE_ACTION]
 
 func blink() -> void:	
+	if pending_actions.find(TileGlobals.TILE_ACTION.TOXIC) != -1:
+		do_toxic_action(false)
+		pending_actions.clear()
+		return	
+		
 	if current_state == TileGlobals.TILE_TYPE.SEED:
-		do_tree_action()
-		if pending_actions.find(TileGlobals.TILE_TYPE.TOXIC) != -1:
-			do_toxic_action()
+		do_tree_action()	
+		
+	if current_state == TileGlobals.TILE_TYPE.WATER:
+		spread_water(self)
+		
 			
 	pending_actions.clear()
+
+func spread_water(tile: Tile):
+	var cardinal_tiles: Array[Tile] = tile._get_cardinal_tiles()
+	for cardinal_tile in cardinal_tiles:
+		if cardinal_tile == null:
+			continue
+			
+		if cardinal_tile.current_state != TileGlobals.TILE_TYPE.HOLE:
+			continue
+			
+		if cardinal_tile.pending_actions.find(TileGlobals.TILE_ACTION.TOXIC) != -1:
+			continue
+			
+		cardinal_tile._do_water_action()
+		spread_water(cardinal_tile)
+		
+	return
 
 func _ready() -> void:
 	highlight_texture_component.texture = highlight_texture
@@ -36,9 +62,10 @@ func get_possible_actions() -> Array:
 	if current_state == TileGlobals.TILE_TYPE.TOXIC:
 		possible_actions.append(TileGlobals.TILE_ACTION.CLEAN)
 	elif current_state == TileGlobals.TILE_TYPE.GROUND:
-		possible_actions.append(TileGlobals.TILE_ACTION.WATER)  
+		possible_actions.append(TileGlobals.TILE_ACTION.DIG)
 	elif current_state == TileGlobals.TILE_TYPE.IRRIGATED:
 		possible_actions.append(TileGlobals.TILE_ACTION.PLANT)
+		possible_actions.append(TileGlobals.TILE_ACTION.DIG)
 	
 	return possible_actions
 	
@@ -49,8 +76,14 @@ func highlight_tile(is_highlighted: bool):
 		highlight_texture_component.modulate.a = 0
 
 func can_do_action(action_name: TileGlobals.TILE_ACTION) -> bool:	
+	if current_state == TileGlobals.TILE_TYPE.ROCK:
+		return false
+	
+	if action_name == TileGlobals.TILE_ACTION.DIG:
+		return current_state == TileGlobals.TILE_TYPE.GROUND || current_state == TileGlobals.TILE_TYPE.IRRIGATED
+	
 	if action_name == TileGlobals.TILE_ACTION.WATER:
-		return current_state != TileGlobals.TILE_TYPE.SEED or current_state != TileGlobals.TILE_TYPE.TREE
+		return current_state == TileGlobals.TILE_TYPE.HOLE || current_state == TileGlobals.TILE_TYPE.GROUND || current_state == TileGlobals.TILE_TYPE.IRRIGATED
 		
 	if action_name == TileGlobals.TILE_ACTION.PLANT:
 		return current_state == TileGlobals.TILE_TYPE.IRRIGATED
@@ -69,6 +102,8 @@ func do_action(action_name: TileGlobals.TILE_ACTION) -> void:
 		_do_water_action()
 	elif (action_name == TileGlobals.TILE_ACTION.CLEAN):
 		_do_ground_action()
+	elif (action_name == TileGlobals.TILE_ACTION.DIG):
+		do_dig_action()
 		
 func _do_ground_action():
 	current_state = TileGlobals.TILE_TYPE.GROUND
@@ -79,6 +114,8 @@ func _do_plant_action():
 	current_texture_component.texture = seed_texture  
 	
 func _do_water_action():
+	if current_state == TileGlobals.TILE_TYPE.ROCK:
+		return
 	current_state = TileGlobals.TILE_TYPE.WATER
 	current_texture_component.texture = water_texture
 	
@@ -87,9 +124,14 @@ func _do_water_action():
 		if tile:
 			tile.do_irrigate_action()
 	
-func do_toxic_action():
+func do_toxic_action(spread: bool = true):
 	current_state = TileGlobals.TILE_TYPE.TOXIC
 	current_texture_component.texture = toxic_texture
+	var diagonal_tiles: Array[Tile] = _get_diagonal_tiles()
+	if spread:
+		for tile in diagonal_tiles:
+			if tile:
+				tile.pending_actions.append(TileGlobals.TILE_ACTION.TOXIC)
 	
 func do_irrigate_action():
 	if current_state != TileGlobals.TILE_TYPE.GROUND:
@@ -100,17 +142,43 @@ func do_irrigate_action():
 func do_tree_action():
 	current_state = TileGlobals.TILE_TYPE.TREE
 	current_texture_component.texture = tree_texture
+	
+func do_dig_action():
+	current_state = TileGlobals.TILE_TYPE.HOLE
+	current_texture_component.texture = hole_texture
 
 func _get_surrounding_tiles() -> Array[Tile]:
 	var surrounding_tiles: Array[Tile] = []
 	
-	surrounding_tiles.append(grid.get_tile(grid_position.x, grid_position.y + 1))
-	surrounding_tiles.append(grid.get_tile(grid_position.x, grid_position.y - 1))
-	surrounding_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y + 1))
-	surrounding_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y - 1))
-	surrounding_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y))
-	surrounding_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y))
-	surrounding_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y - 1))
-	surrounding_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y + 1))
+	var cardinal_tiles = _get_cardinal_tiles()
+	for cardinal_tile in cardinal_tiles:
+		surrounding_tiles.append(cardinal_tile)
+		
+	var diagonal_tiles = _get_diagonal_tiles()
+	for diagonal_tile in diagonal_tiles:
+		surrounding_tiles.append(diagonal_tile)
 	
 	return surrounding_tiles
+	
+func do_rock_action():
+	current_state = TileGlobals.TILE_TYPE.ROCK
+	current_texture_component.texture = rock_texture
+	
+	
+func _get_cardinal_tiles() -> Array[Tile]:
+	var cardinal_tiles: Array[Tile] = []
+	cardinal_tiles.append(grid.get_tile(grid_position.x, grid_position.y + 1))
+	cardinal_tiles.append(grid.get_tile(grid_position.x, grid_position.y - 1))
+	cardinal_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y))
+	cardinal_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y))
+
+	return cardinal_tiles
+
+func _get_diagonal_tiles() -> Array[Tile]:
+	var diagonal_tiles: Array[Tile] = []
+	diagonal_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y + 1))
+	diagonal_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y - 1))
+	diagonal_tiles.append(grid.get_tile(grid_position.x + 1, grid_position.y - 1))
+	diagonal_tiles.append(grid.get_tile(grid_position.x - 1, grid_position.y + 1))
+	
+	return diagonal_tiles

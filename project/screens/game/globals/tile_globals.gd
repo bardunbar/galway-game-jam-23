@@ -8,12 +8,16 @@ enum TILE_TYPE {
 	IRRIGATED,
 	TOXIC,
 	CLEAN,
+	ROCK,
+	HOLE,
 }
 
 enum TILE_ACTION {
 	PLANT,
 	CLEAN,
 	WATER,
+	DIG,
+	TOXIC,
 }
 
 class TileActionInformation:
@@ -28,4 +32,5 @@ var tile_action_information: Dictionary[TILE_ACTION, TileActionInformation] = {
 	TILE_ACTION.CLEAN: TileActionInformation.new("clean", 2),
 	TILE_ACTION.WATER: TileActionInformation.new("water", 2),
 	TILE_ACTION.PLANT: TileActionInformation.new("plant", 2),
+	TILE_ACTION.DIG: TileActionInformation.new("dig", 2),
 }
