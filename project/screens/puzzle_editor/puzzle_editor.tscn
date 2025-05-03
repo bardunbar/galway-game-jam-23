@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuxgy6siierjg"]
+
+[ext_resource type="Script" uid="uid://1dxdas2un18v" path="res://screens/puzzle_editor/puzzle_editor.gd" id="1_pbx64"]
+[ext_resource type="PackedScene" uid="uid://c4oy6yui5ffhj" path="res://screens/play_menu/play_menu_scene.tscn" id="2_a1cpp"]
+
+[node name="PuzzleEditor" type="Node2D"]
+script = ExtResource("1_pbx64")
+play_menu = ExtResource("2_a1cpp")
+
+[node name="InterfaceLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true

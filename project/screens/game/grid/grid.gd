@@ -11,6 +11,14 @@ extends Node2D
 var game: GameScript
 var current_tiles: Array[Array]
 
+func make_random_toxic_tiles(num_tiles: int):
+	for i in range(num_tiles):
+		var random_x = randi_range(0, grid_width - 1)
+		var random_y = randi_range(0, grid_height - 1)
+		
+		var tile: Tile = get_tile(random_x, random_y)
+		tile.do_toxic_action()
+
 func blink() -> void:
 	for row in current_tiles:
 		for object in row:
@@ -43,7 +51,14 @@ func getStartingLocation() -> Vector2:
 	return get_tile(startingGridLocation.x, startingGridLocation.y).global_position
 	
 func canMove(x: int, y: int) -> bool:
-	return is_valid_tile_loc(x, y)
+	if !is_valid_tile_loc(x, y):
+		return false
+		
+	var tile: Tile = get_tile(x, y)
+	if tile.current_state == TileGlobals.TILE_TYPE.TREE:
+		return false
+	
+	return true
 	
 func is_valid_tile_loc(x: int, y: int) -> bool:
 	return x >= 0 and x < grid_width and y >= 0 and y < grid_height
