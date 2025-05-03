@@ -20,6 +20,7 @@ func _ready() -> void:
 	player.connect("action_points_changed", _on_action_points_changed)
 	player.connect("ready_to_blink", _on_ready_to_blink)
 	player.connect("action1_updated", _on_action1_updated)
+	player.connect("action2_updated", _on_action2_updated)
 	player.initialize(self)
 	hud.update_action_points(action_points, action_points)
 	return
@@ -33,3 +34,6 @@ func _on_ready_to_blink():
 
 func _on_action1_updated(is_active: bool, prompt_text: String, cost: int):
 	hud.update_action_1_prompt(is_active, prompt_text, cost)
+	
+func _on_action2_updated(is_active: bool, prompt_text: String, cost: int):
+	hud.update_action_2_prompt(is_active, prompt_text, cost)

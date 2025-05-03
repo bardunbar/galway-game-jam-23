@@ -64,39 +64,59 @@ text = "BATTERY: "
 layout_mode = 2
 text = "10"
 
-[node name="Action1Container" type="HBoxContainer" parent="InterfaceLayer"]
-visible = false
+[node name="Prompts" type="HBoxContainer" parent="InterfaceLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -82.0
-offset_top = -64.0
-offset_right = 82.0
-offset_bottom = -39.0
+offset_left = -575.0
+offset_top = -71.0
+offset_right = 576.0
+offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 
-[node name="Action1Input" type="Label" parent="InterfaceLayer/Action1Container"]
+[node name="Action1Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
+layout_mode = 2
+
+[node name="Action1Input" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
 layout_mode = 2
 text = "[SPACE]"
 
-[node name="Action1Prompt" type="Label" parent="InterfaceLayer/Action1Container"]
+[node name="Action1Prompt" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
 layout_mode = 2
 text = "10"
 
-[node name="Action1CostText" type="Label" parent="InterfaceLayer/Action1Container"]
+[node name="Action1CostText" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
 layout_mode = 2
 text = "    BATTERY:"
 
-[node name="Action1Cost" type="Label" parent="InterfaceLayer/Action1Container"]
+[node name="Action1Cost" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
 layout_mode = 2
 text = "10"
 
-[node name="CenterContainer" type="CenterContainer" parent="InterfaceLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Action2Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
+layout_mode = 2
+
+[node name="Action2Input" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+text = "     [CTRL]"
+
+[node name="Action2Prompt" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+text = "10"
+
+[node name="Action2CostText" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+text = "    BATTERY:"
+
+[node name="Action2Cost" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+text = "10"
 
 [node name="Fade" type="ColorRect" parent="."]
 layout_mode = 1
