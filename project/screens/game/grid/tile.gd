@@ -28,8 +28,8 @@ func _ready() -> void:
 	highlight_tile(false)
 	_do_ground_action()
 
-func get_possible_actions() -> Array[String]:
-	var possible_actions: Array[String] = Array()
+func get_possible_actions() -> Array:
+	var possible_actions = []
 	
 	if current_state == "toxic":
 		possible_actions.append("clean")

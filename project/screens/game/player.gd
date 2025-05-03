@@ -55,6 +55,18 @@ func _process(delta: float) -> void:
 	
 func processInput() -> void:
 	if (curActionPoints > 0 and curAction == ACTION_TYPE.NONE):
+		var action_pressed = 0
+		if Input.is_action_just_pressed("Action_1"):
+			action_pressed = 1
+		if action_pressed > 0:
+			var facing_tile = get_facing_tile()
+			if facing_tile != null:
+				var possible_actions = facing_tile.get_possible_actions() as Array[String]
+				if possible_actions.size() > action_pressed:
+					var action = possible_actions[action_pressed - 1]
+					facing_tile.do_action(action)
+					return
+			
 		var movementDirection: Vector2i = Vector2i.ZERO
 		if Input.is_action_pressed("move_right"):
 			movementDirection.x = 1
