@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuxgy6siierjg"]
+[gd_scene load_steps=6 format=3 uid="uid://cuxgy6siierjg"]
 
 [ext_resource type="Script" uid="uid://1dxdas2un18v" path="res://screens/puzzle_editor/puzzle_editor.gd" id="1_pbx64"]
 [ext_resource type="PackedScene" uid="uid://dokrrfb2rfisg" path="res://screens/game/grid/grid.tscn" id="2_ajwto"]
 [ext_resource type="PackedScene" uid="uid://c43y5ruhaatip" path="res://screens/puzzle_editor/Widgets/Rotator.tscn" id="2_iyvlx"]
 [ext_resource type="Script" uid="uid://cu84ydqg74gso" path="res://screens/game/camera_2d.gd" id="3_ajwto"]
+[ext_resource type="Texture2D" uid="uid://dxu06wcr35n26" path="res://assets/textures/spritesheet_robotsTop.png" id="5_raffu"]
 
 [node name="PuzzleEditor" type="Node2D"]
 script = ExtResource("1_pbx64")
@@ -79,7 +80,7 @@ grow_horizontal = 0
 [node name="TileGrid" type="GridContainer" parent="InterfaceLayer/TileOptionsContainer"]
 layout_mode = 2
 
-[node name="CheckButton" type="CheckButton" parent="InterfaceLayer/TileOptionsContainer"]
+[node name="IsPlayer" type="CheckButton" parent="InterfaceLayer/TileOptionsContainer"]
 layout_mode = 2
 text = "Player Here"
 
@@ -89,6 +90,12 @@ text = "Player Here"
 position_smoothing_enabled = true
 script = ExtResource("3_ajwto")
 
+[node name="PlayerLocation" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_raffu")
+region_enabled = true
+region_rect = Rect2(0, 0, 150, 156)
+
 [connection signal="pressed" from="InterfaceLayer/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="InterfaceLayer/VBoxContainer/TestButton" to="." method="_on_test_button_pressed"]
 [connection signal="text_submitted" from="InterfaceLayer/VBoxContainer/PlanetName" to="." method="_on_planet_name_text_submitted"]
@@ -96,3 +103,4 @@ script = ExtResource("3_ajwto")
 [connection signal="on_value_changed" from="InterfaceLayer/VBoxContainer/GridHeight" to="." method="_on_grid_height_value_changed"]
 [connection signal="on_value_changed" from="InterfaceLayer/VBoxContainer/Difficulty" to="." method="_on_difficulty_value_changed"]
 [connection signal="on_value_changed" from="InterfaceLayer/VBoxContainer/TimeUntilHumans" to="." method="_on_time_until_humans_value_changed"]
+[connection signal="toggled" from="InterfaceLayer/TileOptionsContainer/IsPlayer" to="." method="_on_is_player_toggled"]
