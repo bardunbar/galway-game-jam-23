@@ -231,12 +231,6 @@ text = "    BATTERY:"
 layout_mode = 2
 text = "10"
 
-[node name="Action1Container2" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
-layout_mode = 2
-
-[node name="Action2Container2" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
-layout_mode = 2
-
 [node name="ScoresContainer" type="VBoxContainer" parent="InterfaceLayer"]
 anchors_preset = 1
 anchor_left = 1.0
