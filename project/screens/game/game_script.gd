@@ -3,6 +3,7 @@ extends Node2D
 
 @export var play_menu: PackedScene
 @export var action_points: int
+@export var starting_level : LevelDefinition
 
 @onready var interface_layer: CanvasLayer = %InterfaceLayer
 @onready var grid:Grid = $Grid
