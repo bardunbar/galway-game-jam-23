@@ -11,6 +11,8 @@ extends Node2D
 var game: GameScript
 var current_tiles: Array[Array]
 
+signal on_mouse_entered_tile(tile:Tile)
+
 func make_random_tiles(num_tiles: int, tile_action: TileGlobals.TILE_TYPE):
 	for i in range(num_tiles):
 		var random_x = randi_range(0, grid_width - 1)
@@ -113,6 +115,7 @@ func build_grid(width, height):
 				tile = current_tiles[i][j]
 			if tile == null:
 				tile = tile_class.instantiate() as Tile
+				tile.connect("on_mouse_entered_tile", _on_mouse_entered_tile)
 				current_tiles[i].append(tile)
 				add_child(tile)
 			tile.position.x = (tile_size * (j + 0.5))
@@ -130,3 +133,6 @@ func get_grid_tile_width():
 
 func get_grid_tile_height():
 	return grid_height * tile_size
+	
+func _on_mouse_entered_tile(tile:Tile):
+	on_mouse_entered_tile.emit(tile)

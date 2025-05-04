@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://hv7ajecc3s74"]
+[gd_scene load_steps=12 format=3 uid="uid://hv7ajecc3s74"]
 
 [ext_resource type="Script" uid="uid://defb5quso33t0" path="res://screens/game/grid/tile.gd" id="1_6oxcn"]
 [ext_resource type="Texture2D" uid="uid://ov17un2vb3t7" path="res://assets/textures/earth_placeholder_texture.png" id="2_xi6y3"]
@@ -11,7 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://c6mhwnkcpj0sx" path="res://assets/textures/hole_placeholder_texture.png" id="8_q4v6p"]
 [ext_resource type="Texture2D" uid="uid://b3nuvi7xb8pwm" path="res://assets/textures/rock_placeholder_texture.png" id="9_cbw23"]
 
-[node name="Tile" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbw23"]
+
+[node name="Tile" type="Area2D"]
 script = ExtResource("1_6oxcn")
 ground_texture = ExtResource("2_xi6y3")
 water_texture = ExtResource("3_3sxbs")
@@ -31,3 +33,8 @@ texture = ExtResource("2_xi6y3")
 z_index = 1
 scale = Vector2(0.994417, 1)
 texture = ExtResource("3_3sxbs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cbw23")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
