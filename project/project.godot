@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="B.L.I.N.K"
-run/main_scene="uid://cg2pqihw6wjud"
+run/main_scene="uid://ut2ofwgaowy6"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
