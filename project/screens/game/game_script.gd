@@ -46,7 +46,8 @@ func _on_ready_to_blink():
 	
 func _on_mid_blink():
 	player.curActionPoints = action_points
-	player.animation_player.stop()
+	player.reset()
+	
 	hud.update_action_points(action_points, action_points)
 	grid.blink()
 

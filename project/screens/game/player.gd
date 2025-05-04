@@ -11,6 +11,8 @@ enum ACTION_TYPE {NONE, MOVE, ROTATE, ACTION}
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var player_sprite: Sprite2D = $Sprite2D
+@onready var low_on_battery_sfx: AudioStreamPlayer = $LowOnBatterySFX
+@onready var interact_sfx: AudioStreamPlayer = $InteractSFX
 
 var curActionPoints
 var game: GameScript
@@ -26,6 +28,11 @@ signal action_points_changed(new_action_points: int)
 signal ready_to_blink
 signal action1_updated(is_active: bool, prompt_text: String, cost: int)
 signal action2_updated(is_active: bool, prompt_text: String, cost: int)
+
+func reset() -> void:
+	animation_player.stop()
+	low_on_battery_sfx.stop()
+	
 
 func _ready() -> void:
 	return
@@ -48,6 +55,7 @@ func use_action_points(count: int):
 	action_points_changed.emit(curActionPoints)
 	if !animation_player.is_playing() && curActionPoints <= low_on_action_points_amount:
 		animation_player.play("low_on_battery")
+		low_on_battery_sfx.play()
 	
 func finish_action():
 	movementAlpha = 0
@@ -76,6 +84,7 @@ func processInput() -> void:
 				if possible_actions.size() >= action_pressed:
 					var action = possible_actions[action_pressed - 1]
 					facing_tile.do_action(action)
+					interact_sfx.play()
 					var action_cost = TileGlobals.tile_action_information[action].cost
 					use_action_points(action_cost)
 					set_faced_tile_highlight(false)

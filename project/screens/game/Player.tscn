@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7htpu5jt4t3"]
+[gd_scene load_steps=8 format=3 uid="uid://b7htpu5jt4t3"]
 
 [ext_resource type="Script" uid="uid://bi6r0conrx3a" path="res://screens/game/player.gd" id="1_5unck"]
 [ext_resource type="Texture2D" uid="uid://dxu06wcr35n26" path="res://assets/textures/spritesheet_robotsTop.png" id="1_24xae"]
+[ext_resource type="AudioStream" uid="uid://cmiatyat7irk6" path="res://assets/sounds/sfx/interact.ogg" id="3_qk4c7"]
+[ext_resource type="AudioStream" uid="uid://d0yej8xaw17en" path="res://assets/sounds/sfx/low_on_battery.ogg" id="4_64xwq"]
 
 [sub_resource type="Animation" id="Animation_24xae"]
 resource_name = "low_on_battery"
@@ -54,3 +56,11 @@ region_rect = Rect2(0, 0, 148.745, 154.383)
 libraries = {
 &"": SubResource("AnimationLibrary_5unck")
 }
+
+[node name="InteractSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qk4c7")
+
+[node name="LowOnBatterySFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_64xwq")
+volume_db = 5.0
+parameters/looping = true
