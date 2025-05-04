@@ -4,22 +4,6 @@
 [ext_resource type="FontFile" uid="uid://dl7ft0c6fs5vb" path="res://assets/fonts/Kenney Future.ttf" id="1_86kf6"]
 [ext_resource type="PackedScene" uid="uid://cg2pqihw6wjud" path="res://screens/main_menu/main_menu_scene.tscn" id="2_b2hil"]
 
-[sub_resource type="Animation" id="Animation_b2hil"]
-resource_name = "input_prompt"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/SkipIntroLabel:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_xnn14"]
 length = 0.001
 tracks/0/type = "value"
@@ -74,6 +58,22 @@ tracks/1/keys = {
 "args": [],
 "method": &"on_mid_fade"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_b2hil"]
+resource_name = "input_prompt"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/SkipIntroLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2eg1r"]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/scripts/level_definition_script.gd" id="1_q6qmt"]
+
+[resource]
+script = ExtResource("1_q6qmt")
+name = "Tutorial"
+grid_width = 11
+grid_height = 10
+start_location = Vector2i(5, 8)
+grid_data = Array[int]([2, 3, 3, 7, 4, 2, 4, 7, 3, 3, 2, 2, 2, 3, 7, 4, 3, 4, 7, 3, 2, 2, 2, 3, 3, 7, 7, 4, 7, 7, 3, 3, 2, 3, 3, 7, 7, 7, 0, 7, 7, 7, 4, 3, 4, 4, 7, 7, 7, 0, 7, 7, 7, 4, 4, 0, 0, 7, 7, 7, 0, 7, 7, 7, 0, 0, 0, 0, 7, 7, 7, 0, 7, 7, 7, 0, 0, 0, 0, 0, 7, 7, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0])
+difficulty = 1
+time_until_humans = 200
