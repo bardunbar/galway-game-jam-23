@@ -10,6 +10,8 @@ extends Control
 @onready var action2_container:HBoxContainer = $InterfaceLayer/Prompts/Action2Container
 @onready var action2_prompt:Label = $InterfaceLayer/Prompts/Action2Container/Action2Prompt
 @onready var action2_cost:Label = $InterfaceLayer/Prompts/Action2Container/Action2Cost
+@onready var cycles_remaining:HBoxContainer = $InterfaceLayer/ScoresContainer/CyclesRemaining
+@onready var path_prototype:TextureRect = $InterfaceLayer/ScoresContainer/CyclesRemaining/Path
 
 signal on_mid_blink
 
@@ -33,7 +35,23 @@ func update_action_2_prompt(is_active: bool, prompt_text: String, cost: int):
 		action2_prompt.text = prompt_text
 		action2_cost.text = str(cost)
 	return
-	
+
+func update_cycle_counts(current_cycle: int, total_cycles: int) -> void:
+	var num_paths = cycles_remaining.get_child_count() - 3
+	var needed_paths = total_cycles - current_cycle - 1
+	if num_paths < needed_paths:
+		for i in range(needed_paths - num_paths):
+			var new_path : TextureRect = path_prototype.duplicate()
+			cycles_remaining.add_child(new_path)
+			cycles_remaining.move_child(new_path, cycles_remaining.get_child_count() - 2)
+			new_path.visible = true
+		
+	elif num_paths > needed_paths:
+		for i in range(num_paths - needed_paths):
+			var path = cycles_remaining.get_child(cycles_remaining.get_child_count() - 2)
+			cycles_remaining.remove_child(path)
+			path.queue_free()
+
 func play_fade_animation():
 	if !animation_player.is_playing():
 		animation_player.play("blink")
