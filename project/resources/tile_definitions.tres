@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TileDefinitions" load_steps=9 format=3 uid="uid://dkxai73g86may"]
+[gd_resource type="Resource" script_class="TileDefinitions" load_steps=10 format=3 uid="uid://dkxai73g86may"]
 
 [ext_resource type="Texture2D" uid="uid://ov17un2vb3t7" path="res://assets/textures/earth_placeholder_texture.png" id="1_rp7j0"]
 [ext_resource type="Texture2D" uid="uid://crw7yk25cjj5y" path="res://assets/textures/seeds_placeholder_texture.png" id="2_yeuus"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bsabv8nsvw1q8" path="res://assets/textures/toxic_placeholder_texture.png" id="6_8duv4"]
 [ext_resource type="Texture2D" uid="uid://b3nuvi7xb8pwm" path="res://assets/textures/rock_placeholder_texture.png" id="7_cf85x"]
 [ext_resource type="Script" uid="uid://f5o60raq3tkc" path="res://resources/scripts/tile_definitions.gd" id="8_8xi2i"]
+[ext_resource type="Texture2D" uid="uid://c6mhwnkcpj0sx" path="res://assets/textures/hole_placeholder_texture.png" id="9_yeuus"]
 
 [resource]
 script = ExtResource("8_8xi2i")
@@ -18,5 +19,6 @@ texture_map = Dictionary[int, Texture]({
 3: ExtResource("4_37p0b"),
 4: ExtResource("5_vyn4q"),
 5: ExtResource("6_8duv4"),
-7: ExtResource("7_cf85x")
+7: ExtResource("7_cf85x"),
+8: ExtResource("9_yeuus")
 })

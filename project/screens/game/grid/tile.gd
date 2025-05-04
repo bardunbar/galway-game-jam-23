@@ -4,14 +4,6 @@ extends Area2D
 @onready var current_texture_component: Sprite2D = $CurrentTexture
 @onready var highlight_texture_component: Sprite2D = $HighlightTexture
 
-@export var ground_texture: Texture
-@export var water_texture: Texture
-@export var toxic_texture: Texture
-@export var watered_ground_texture: Texture
-@export var seed_texture: Texture
-@export var tree_texture: Texture
-@export var hole_texture: Texture
-@export var rock_texture: Texture
 @export var highlight_texture: Texture 
 
 var tile_textures : Dictionary[TileGlobals.TILE_TYPE, Texture] = {}
@@ -71,7 +63,7 @@ func set_tile_type(tile_type : TileGlobals.TILE_TYPE):
 	if tile_textures.has(tile_type):
 		current_texture_component.texture = tile_textures[tile_type]
 	else:
-		current_texture_component.texture = ground_texture
+		current_texture_component.texture = null
 		
 	
 
