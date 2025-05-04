@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://doruyts8emj2g"]
+[gd_scene load_steps=12 format=3 uid="uid://doruyts8emj2g"]
 
 [ext_resource type="Script" uid="uid://dgimsfcu1ush7" path="res://screens/game/UI/hud.gd" id="1_uiap5"]
+[ext_resource type="Texture2D" uid="uid://7th0hgm7c33y" path="res://assets/ui/keyboard_r.png" id="2_jhgcc"]
 [ext_resource type="Texture2D" uid="uid://btp3bax34ts4e" path="res://assets/ui/keyboard_space.png" id="2_vlq7e"]
 [ext_resource type="Texture2D" uid="uid://y7cn3jrtghs4" path="res://assets/ui/keyboard_ctrl.png" id="3_74e8q"]
 [ext_resource type="Texture2D" uid="uid://bgtpdybg7u2xn" path="res://assets/textures/ui/ship_region.tres" id="4_y3vke"]
@@ -149,6 +150,85 @@ text = "BATTERY: "
 [node name="ActionPointsValue" type="Label" parent="InterfaceLayer/ActionPointsContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_he8m2")
+text = "10"
+
+[node name="RestartContainer" type="HBoxContainer" parent="InterfaceLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -165.0
+offset_top = -85.0
+offset_right = -16.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.75, 0.75)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Action2Input" type="TextureRect" parent="InterfaceLayer/RestartContainer"]
+layout_mode = 2
+texture = ExtResource("2_jhgcc")
+
+[node name="Action2Prompt" type="Label" parent="InterfaceLayer/RestartContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Restart"
+
+[node name="Prompts" type="HBoxContainer" parent="InterfaceLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -575.0
+offset_top = -71.0
+offset_right = 576.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Action1Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
+layout_mode = 2
+
+[node name="Action1Input" type="TextureRect" parent="InterfaceLayer/Prompts/Action1Container"]
+layout_mode = 2
+texture = ExtResource("2_vlq7e")
+
+[node name="Action1Prompt" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
+layout_mode = 2
+text = "10"
+
+[node name="Action1CostText" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
+layout_mode = 2
+text = "    BATTERY:"
+
+[node name="Action1Cost" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
+layout_mode = 2
+text = "10"
+
+[node name="Action2Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
+layout_mode = 2
+
+[node name="Action2Input" type="TextureRect" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+texture = ExtResource("3_74e8q")
+
+[node name="Action2Prompt" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+text = "10"
+
+[node name="Action2CostText" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+text = "    BATTERY:"
+
+[node name="Action2Cost" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
 text = "10"
 
 [node name="ScoresContainer" type="VBoxContainer" parent="InterfaceLayer"]

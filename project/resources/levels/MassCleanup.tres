@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/scripts/level_definition_script.gd" id="1_0yhwp"]
+
+[resource]
+script = ExtResource("1_0yhwp")
+name = "MassCleanup"
+grid_width = 7
+grid_height = 7
+start_location = Vector2i(0, 0)
+grid_data = Array[int]([0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 2, 0, 4, 4, 0, 0, 5, 2, 5, 3, 3, 5, 2, 2, 2, 2, 2, 5, 7, 0, 5, 2, 5, 3, 3, 0, 0, 3, 2, 0, 4, 4, 0, 2, 2, 5, 2, 0, 0])
+difficulty = 1
+time_until_humans = 400

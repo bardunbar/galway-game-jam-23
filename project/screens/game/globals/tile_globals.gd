@@ -42,12 +42,14 @@ var tile_action_information: Dictionary[TILE_ACTION, TileActionInformation] = {
 
 var tile_oxygen_scores: Dictionary[TILE_TYPE, float] = {
 	TILE_TYPE.TREE: 10.0,
-}
+} 
  
 var levels = [
 	"Tutorial",
 	"WalledInByTrees",
 	"FirstDig",
 	"FirstToxins",
-	"ToxinCleanup"
+	"ToxinCleanup",
+	"Sacrifice",
+	"MassCleanup"
 ]
