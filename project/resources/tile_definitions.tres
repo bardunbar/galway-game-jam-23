@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TileDefinitions" load_steps=9 format=3 uid="uid://dkxai73g86may"]
+
+[ext_resource type="Texture2D" uid="uid://ov17un2vb3t7" path="res://assets/textures/earth_placeholder_texture.png" id="1_rp7j0"]
+[ext_resource type="Texture2D" uid="uid://crw7yk25cjj5y" path="res://assets/textures/seeds_placeholder_texture.png" id="2_yeuus"]
+[ext_resource type="Texture2D" uid="uid://bepaib6x7j04" path="res://assets/textures/tree_placeholder_texture.png" id="3_yex81"]
+[ext_resource type="Texture2D" uid="uid://dltlvfkk1u64c" path="res://assets/textures/water_placeholder_texture.png" id="4_37p0b"]
+[ext_resource type="Texture2D" uid="uid://vv8dwrjj8uey" path="res://assets/textures/earth_watered_placeholder_texture.png" id="5_vyn4q"]
+[ext_resource type="Texture2D" uid="uid://bsabv8nsvw1q8" path="res://assets/textures/toxic_placeholder_texture.png" id="6_8duv4"]
+[ext_resource type="Texture2D" uid="uid://b3nuvi7xb8pwm" path="res://assets/textures/rock_placeholder_texture.png" id="7_cf85x"]
+[ext_resource type="Script" uid="uid://f5o60raq3tkc" path="res://resources/scripts/tile_definitions.gd" id="8_8xi2i"]
+
+[resource]
+script = ExtResource("8_8xi2i")
+texture_map = Dictionary[int, Texture]({
+0: ExtResource("1_rp7j0"),
+1: ExtResource("2_yeuus"),
+2: ExtResource("3_yex81"),
+3: ExtResource("4_37p0b"),
+4: ExtResource("5_vyn4q"),
+5: ExtResource("6_8duv4"),
+7: ExtResource("7_cf85x")
+})
