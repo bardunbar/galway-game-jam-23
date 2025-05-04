@@ -181,7 +181,7 @@ func import_from_resource(level_data : LevelDefinition) -> void:
 	
 	for y in range(grid_height):
 		for x in range(grid_width):
-			var type : TileGlobals.TILE_TYPE = level_data.grid_data[x + grid_height * grid_width]
+			var type : TileGlobals.TILE_TYPE = level_data.grid_data[x + y * grid_width]
 			var cur_tile : Tile = get_tile(x, y)
 			cur_tile.set_tile_type(type)
 	
