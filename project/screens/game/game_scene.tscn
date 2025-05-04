@@ -23,6 +23,9 @@ metadata/_custom_type_script = "uid://54y7nga2oqwa"
 
 [node name="Player" parent="." instance=ExtResource("5_6vlqa")]
 position = Vector2(202, 146)
+movementSpeed = null
+rotationSpeed = null
+low_on_action_points_amount = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

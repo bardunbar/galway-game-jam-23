@@ -66,9 +66,11 @@ func finish_action():
 		set_faced_tile_highlight(true)
 	
 func _process(delta: float) -> void:
+	if !game.playing:
+		return
+ 
 	processInput()
 	processMovement(delta)
-	return
 	
 func processInput() -> void:
 	if (curActionPoints > 0 and curAction == ACTION_TYPE.NONE):
