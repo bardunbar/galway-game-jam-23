@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbcqfyn708l1y"]
+
+[ext_resource type="Texture2D" uid="uid://bepaib6x7j04" path="res://assets/textures/tree_placeholder_texture.png" id="1_4sb8j"]
+[ext_resource type="Script" uid="uid://dfox0jedcfwt" path="res://screens/puzzle_editor/Widgets/tile_button.gd" id="2_i7wv5"]
+[ext_resource type="Texture2D" uid="uid://baha6cyrx3v11" path="res://assets/textures/TileHighlight.png" id="3_qc4xq"]
+
+[node name="TileButton" type="TextureButton"]
+focus_mode = 0
+texture_normal = ExtResource("1_4sb8j")
+script = ExtResource("2_i7wv5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_qc4xq")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

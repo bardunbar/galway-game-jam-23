@@ -7,7 +7,6 @@ extends Area2D
 @export var highlight_texture: Texture 
 
 var tile_textures : Dictionary[TileGlobals.TILE_TYPE, Texture] = {}
-var tile_definitions : TileDefinitions = null
 
 var grid: Grid
 var grid_position: Vector2 = Vector2.ZERO
@@ -200,3 +199,4 @@ func _get_diagonal_tiles() -> Array[Tile]:
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("mouse_down") and event is InputEventMouseButton:
 		on_mouse_entered_tile.emit(self)
+		print("mouse clicked")

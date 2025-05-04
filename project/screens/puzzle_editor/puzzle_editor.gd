@@ -2,6 +2,7 @@ class_name PuzzleEditor
 extends Node2D
 
 @export var play_menu: PackedScene
+@export var tile_button_class: PackedScene
 @onready var grid:Grid = $Grid
 @onready var interface_layer: CanvasLayer = %InterfaceLayer
 @onready var camera:GameCamera = $Camera2D
@@ -17,6 +18,7 @@ var difficulty: int = 1
 var time_until_humans: int = 100
 var selected_tile: Tile
 var player_start_loc: Vector2 = Vector2(0, 0)
+var cur_tile_button: TileButton
 
 func _on_test_button_pressed() -> void:
 	pass # Replace with function body.
@@ -30,12 +32,20 @@ func _on_save_button_pressed() -> void:
 		print("An error happened while saving data: ", error)
 
 func _ready() -> void:
+	_update_grid()
+	grid.connect("on_mouse_entered_tile", _on_new_tile_selected)
+	# Build Tile options grid
+	for tile_type in TileGlobals.tile_defintions.texture_map:
+		var tile_button:TileButton = tile_button_class.instantiate() as TileButton
+		tile_button.set_type(tile_type)
+		tile_button.connect("on_tile_button_highlighted", _on_tile_button_highlighted)
+		tile_options_grid.add_child(tile_button)
+		
+	
+func _update_grid():
 	grid.build_grid(grid_width, grid_height)
 	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
-	grid.connect("on_mouse_entered_tile", _on_new_tile_selected)
-	#player_sprite.global_scale = Vector2(grid.tile_size, grid.tile_size)
 	_update_player_pos()
-	# Build Tile options grid
 	
 func _update_player_pos():
 	var start_tile = grid.get_tile(player_start_loc.x, player_start_loc.y)
@@ -54,6 +64,19 @@ func _on_new_tile_selected(tile: Tile):
 	tile.highlight_tile(true)
 	tile_options_container.visible = true
 	is_player_toggle.set_pressed_no_signal(player_start_loc == tile.grid_position)
+	if cur_tile_button == null or cur_tile_button.tile_type != selected_tile.current_state:
+		if cur_tile_button != null:
+			cur_tile_button.set_highlighted(false)
+		for tile_button in tile_options_grid.get_children():
+			if tile_button.tile_type == selected_tile.current_state:
+				tile_button.set_highlighted(true)
+				cur_tile_button = tile_button
+
+func _on_tile_button_highlighted(tile_button:TileButton):
+	if cur_tile_button != null:
+		cur_tile_button.set_highlighted(false)
+	cur_tile_button = tile_button
+	selected_tile.set_tile_type(cur_tile_button.tile_type)
 
 func _on_planet_name_text_submitted(new_text: String) -> void:
 	planet_name = new_text
@@ -64,15 +87,11 @@ func _on_planet_name_text_submitted(new_text: String) -> void:
 
 func _on_grid_width_value_changed(new_value: int) -> void:
 	grid_width = new_value
-	grid.build_grid(grid_width, grid_height)
-	_update_player_pos()
-	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
+	_update_grid()
 
 func _on_grid_height_value_changed(new_value: int) -> void:
 	grid_height = new_value
-	grid.build_grid(grid_width, grid_height)
-	_update_player_pos()
-	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
+	_update_grid()
 
 func _on_difficulty_value_changed(new_value: int) -> void:
 	difficulty = new_value
