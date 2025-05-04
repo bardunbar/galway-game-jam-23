@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://doruyts8emj2g"]
+[gd_scene load_steps=10 format=3 uid="uid://doruyts8emj2g"]
 
 [ext_resource type="Script" uid="uid://dgimsfcu1ush7" path="res://screens/game/UI/hud.gd" id="1_uiap5"]
 [ext_resource type="Texture2D" uid="uid://btp3bax34ts4e" path="res://assets/ui/keyboard_space.png" id="2_vlq7e"]
 [ext_resource type="Texture2D" uid="uid://y7cn3jrtghs4" path="res://assets/ui/keyboard_ctrl.png" id="3_74e8q"]
+[ext_resource type="Texture2D" uid="uid://bgtpdybg7u2xn" path="res://assets/textures/ui/ship_region.tres" id="4_y3vke"]
+[ext_resource type="Texture2D" uid="uid://big1i0aq6qs0a" path="res://assets/textures/ui/path_region.tres" id="5_he8m2"]
+[ext_resource type="Texture2D" uid="uid://dnacyp8jxxx28" path="res://assets/textures/ui/target_region.tres" id="6_jhgcc"]
 
 [sub_resource type="Animation" id="Animation_vlq7e"]
 length = 0.001
@@ -175,19 +178,27 @@ offset_bottom = 56.0
 grow_horizontal = 0
 
 [node name="CyclesRemaining" type="HBoxContainer" parent="InterfaceLayer/ScoresContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Ship" type="TextureRect" parent="InterfaceLayer/ScoresContainer/CyclesRemaining"]
+layout_mode = 2
+texture = ExtResource("4_y3vke")
+
+[node name="Path" type="TextureRect" parent="InterfaceLayer/ScoresContainer/CyclesRemaining"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
+texture = ExtResource("5_he8m2")
 
-[node name="CyclesTitle" type="Label" parent="InterfaceLayer/ScoresContainer/CyclesRemaining"]
+[node name="Planet" type="TextureRect" parent="InterfaceLayer/ScoresContainer/CyclesRemaining"]
 layout_mode = 2
-text = "Cycles: "
-
-[node name="ActionPointsValue" type="Label" parent="InterfaceLayer/ScoresContainer/CyclesRemaining"]
-layout_mode = 2
-text = "10"
+texture = ExtResource("6_jhgcc")
 
 [node name="OxygenContainer" type="HBoxContainer" parent="InterfaceLayer/ScoresContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
 
 [node name="OxygenTitle" type="Label" parent="InterfaceLayer/ScoresContainer/OxygenContainer"]
 layout_mode = 2

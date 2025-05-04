@@ -32,7 +32,8 @@ func _ready() -> void:
 	grid.make_random_tiles(1, TileGlobals.TILE_TYPE.WATER)
 	grid.make_random_tiles(3, TileGlobals.TILE_TYPE.ROCK)
 	grid.connect("oxygen_updated", _on_oxygen_updated)
-	grid.update_oxygen_level()
+	grid.connect("cycles_updated", _on_cycles_updated)
+	grid.first_cycle()
 	return
 
 func _on_action_points_changed(new_action_points: int):
@@ -42,6 +43,9 @@ func _on_action_points_changed(new_action_points: int):
 
 func _on_oxygen_updated(new_oxygen_level: float) -> void:
 	hud.update_oxygen(new_oxygen_level)
+
+func _on_cycles_updated(current_cycles: int, target_cycles: int) -> void:
+	hud.update_cycle_counts(current_cycles, target_cycles)
 
 func _on_ready_to_blink():
 	hud.play_fade_animation()

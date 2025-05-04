@@ -11,9 +11,12 @@ extends Node2D
 var game: GameScript
 var current_tiles: Array[Array]
 var oxygen_level: float = 0.0
+var current_cycle: int = 0
+var target_cycle: int = 2
 
 signal on_mouse_entered_tile(tile:Tile)
 signal oxygen_updated(new_oxygen_level: float)
+signal cycles_updated(current_cycle: int, target_cycle: int)
 
 func make_random_tiles(num_tiles: int, tile_action: TileGlobals.TILE_TYPE):
 	for i in range(num_tiles):
@@ -27,7 +30,17 @@ func make_random_tiles(num_tiles: int, tile_action: TileGlobals.TILE_TYPE):
 			tile._do_water_action()
 		elif tile_action == TileGlobals.TILE_TYPE.ROCK:
 			tile.do_rock_action()
-			
+
+func first_cycle() -> void:
+	update_oxygen_level()
+	cycles_updated.emit(current_cycle, target_cycle)
+
+func next_cycle() -> void:
+	update_oxygen_level()
+	
+	current_cycle += 1
+	cycles_updated.emit(current_cycle, target_cycle)
+
 func update_oxygen_level() -> float:
 	var current_oxygen: float = 0.0
 
@@ -48,7 +61,7 @@ func blink() -> void:
 			var tile: Tile = object as Tile
 			tile.blink()
 			
-	update_oxygen_level()
+	next_cycle()
 			
 func get_num_trees() -> int:
 	return get_tiles_of_type(TileGlobals.TILE_TYPE.TREE).size()
