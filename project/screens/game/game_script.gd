@@ -2,6 +2,8 @@ class_name GameScript
 extends Node2D
 
 @export var play_menu: PackedScene
+@export var puzzle_editor_scene: PackedScene
+
 @export var action_points: int
 @export var starting_level : LevelDefinition
 
@@ -83,3 +85,7 @@ func _on_action1_updated(is_active: bool, prompt_text: String, cost: int):
 	
 func _on_action2_updated(is_active: bool, prompt_text: String, cost: int):
 	hud.update_action_2_prompt(is_active, prompt_text, cost)
+
+func _return_to_puzzle_editor(success: bool):
+	TileGlobals.test_passed = success
+	get_tree().change_scene_to_packed(puzzle_editor_scene)
