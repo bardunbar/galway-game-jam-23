@@ -2,7 +2,6 @@ class_name PuzzleEditor
 extends Node2D
 
 @export var play_menu: PackedScene
-# @export var game_scene: PackedScene
 @export var tile_button_class: PackedScene
 @onready var grid:Grid = $Grid
 @onready var interface_layer: CanvasLayer = %InterfaceLayer

@@ -13,6 +13,8 @@ extends Node2D
 @onready var camera:GameCamera = $Camera2D
 @onready var blink_sfx:AudioStreamPlayer2D = $BlinkSFX
 
+var cur_level_index = 0
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_open_play_menu"):
 		interface_layer.add_child(play_menu.instantiate())
@@ -23,7 +25,8 @@ func _ready() -> void:
 	if TileGlobals.cur_testing_level:
 		setup_level(TileGlobals.cur_testing_level)
 	else:
-		setup_level(starting_level)
+		var first_level_name = TileGlobals.levels[0]
+		setup_level_from_name(first_level_name)
 	
 	# initialize player connections
 	player.connect("action_points_changed", _on_action_points_changed)
@@ -32,7 +35,6 @@ func _ready() -> void:
 	player.connect("action2_updated", _on_action2_updated)
 	
 	# initialize hud and connections
-	hud.update_action_points(action_points, action_points)
 	hud.on_mid_blink.connect(_on_mid_blink)
 	
 	# initialize camera
@@ -49,6 +51,16 @@ func setup_demo_grid() -> void:
 	grid.make_random_tiles(1, TileGlobals.TILE_TYPE.WATER)
 	grid.make_random_tiles(3, TileGlobals.TILE_TYPE.ROCK)
 
+func go_to_next_level():
+	cur_level_index += 1
+	if TileGlobals.levels.size() > cur_level_index:
+		var next_level_name = TileGlobals.levels[cur_level_index]
+		setup_level_from_name(next_level_name)
+		
+func setup_level_from_name(level_name: String):
+	var level: LevelDefinition = load(str("res://resources/levels/", level_name, ".tres")) as LevelDefinition
+	setup_level(level)
+	
 func setup_level(level_definition: LevelDefinition = null) -> void:
 	if level_definition == null:
 		setup_demo_grid()
@@ -57,6 +69,7 @@ func setup_level(level_definition: LevelDefinition = null) -> void:
 	
 	player.initialize(self)
 	grid.first_cycle()
+	hud.update_action_points(action_points, action_points)
 
 func _on_action_points_changed(new_action_points: int):
 	hud.update_action_points(new_action_points, action_points)
