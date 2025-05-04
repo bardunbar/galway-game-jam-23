@@ -13,11 +13,11 @@ extends Control
 @onready var cycles_remaining:HBoxContainer = $InterfaceLayer/ScoresContainer/CyclesRemaining
 @onready var path_prototype:TextureRect = $InterfaceLayer/ScoresContainer/CyclesRemaining/Path
 @onready var level_over_container:Container = $InterfaceLayer/LevelOver
-@onready var failure_label:Label = $InterfaceLayer/LevelOver/FailureLabel
-@onready var success_label:Label = $InterfaceLayer/LevelOver/SuccessLabel
-@onready var continue_button:Button = $InterfaceLayer/LevelOver/HBoxContainer/ContinueButton
-@onready var restart_button:Button = $InterfaceLayer/LevelOver/HBoxContainer/RestartButton
-@onready var quit_button:Button = $InterfaceLayer/LevelOver/HBoxContainer/QuitButton
+@onready var failure_label:Label = $InterfaceLayer/LevelOver/LevelOverVert/FailureLabel
+@onready var success_label:Label = $InterfaceLayer/LevelOver/LevelOverVert/SuccessLabel
+@onready var continue_button:Button = $InterfaceLayer/LevelOver/LevelOverVert/HBoxContainer/ContinueButton
+@onready var restart_button:Button = $InterfaceLayer/LevelOver/LevelOverVert/HBoxContainer/RestartButton
+@onready var quit_button:Button = $InterfaceLayer/LevelOver/LevelOverVert/HBoxContainer/QuitButton
 @onready var ship_icon:TextureRect = $InterfaceLayer/ScoresContainer/CyclesRemaining/Ship
 
 signal on_mid_blink
@@ -60,12 +60,12 @@ func update_cycle_counts(current_cycle: int, total_cycles: int) -> void:
 				cycles_remaining.remove_child(path)
 				path.queue_free()
 
-func show_level_over(success : bool) -> void:
+func show_level_over(success : bool, has_next_level : bool) -> void:
 	ship_icon.visible = false
 	level_over_container.visible = true
 	failure_label.visible = !success
 	success_label.visible = success
-	continue_button.visible = success
+	continue_button.visible = success and has_next_level
 	
 func hide_level_over() -> void:
 	ship_icon.visible = true

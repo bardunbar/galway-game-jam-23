@@ -87,8 +87,7 @@ func _on_quit_pressed():
 	get_tree().change_scene_to_file("res://screens/main_menu/main_menu_scene.tscn")
 
 func _on_continue_pressed():
-	# TODO: Increment the current level
-	setup_level(current_level)
+	go_to_next_level()
 
 func _on_restart_pressed():
 	setup_level(current_level)
@@ -132,7 +131,10 @@ func _handle_level_over():
 	if TileGlobals.cur_testing_level:
 		_return_to_puzzle_editor(success)
 		return
-	hud.show_level_over(success)
+	hud.show_level_over(success, has_next_level())
+	
+func has_next_level():
+	return TileGlobals.levels.size() > cur_level_index + 1
 
 func _return_to_puzzle_editor(success: bool):
 	TileGlobals.test_passed = success
