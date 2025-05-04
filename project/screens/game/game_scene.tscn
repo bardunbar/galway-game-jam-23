@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cqdnoi24guymt" path="res://screens/game/game_script.gd" id="1_e6mtp"]
 [ext_resource type="PackedScene" uid="uid://c4oy6yui5ffhj" path="res://screens/play_menu/play_menu_scene.tscn" id="2_jjnch"]
-[ext_resource type="Script" uid="uid://bi6r0conrx3a" path="res://screens/game/player.gd" id="3_b275y"]
 [ext_resource type="PackedScene" uid="uid://b7htpu5jt4t3" path="res://screens/game/Player.tscn" id="5_6vlqa"]
 [ext_resource type="Script" uid="uid://54y7nga2oqwa" path="res://screens/game/grid/grid.gd" id="5_b275y"]
 [ext_resource type="PackedScene" uid="uid://hv7ajecc3s74" path="res://screens/game/grid/tile.tscn" id="6_6vlqa"]
 [ext_resource type="Script" uid="uid://cu84ydqg74gso" path="res://screens/game/camera_2d.gd" id="7_1v58h"]
 [ext_resource type="PackedScene" uid="uid://doruyts8emj2g" path="res://screens/game/UI/HUD.tscn" id="7_tvl6b"]
+[ext_resource type="AudioStream" uid="uid://w2kdiuft3gc" path="res://assets/sounds/sfx/blink.ogg" id="8_1v58h"]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_e6mtp")
@@ -23,7 +23,6 @@ metadata/_custom_type_script = "uid://54y7nga2oqwa"
 
 [node name="Player" parent="." instance=ExtResource("5_6vlqa")]
 position = Vector2(202, 146)
-script = ExtResource("3_b275y")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -35,3 +34,7 @@ base_zoom = 1.0
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+
+[node name="BlinkSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_1v58h")
+volume_db = 15.0
