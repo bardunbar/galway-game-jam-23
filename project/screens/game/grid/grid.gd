@@ -11,6 +11,7 @@ extends Node2D
 var game: GameScript
 var current_tiles: Array[Array]
 var oxygen_level: float = 0.0
+var target_oxygen_level = 100.0
 var current_cycle: int = 0
 var target_cycle: int = 1
 

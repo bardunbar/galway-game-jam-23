@@ -20,6 +20,9 @@ action_points = 10
 position = Vector2(170, 49)
 script = ExtResource("5_b275y")
 tile_class = ExtResource("6_6vlqa")
+grid_width = null
+grid_height = null
+tile_size = null
 startingGridLocation = Vector2(2, 2)
 metadata/_custom_type_script = "uid://54y7nga2oqwa"
 

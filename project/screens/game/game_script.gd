@@ -69,6 +69,9 @@ func _on_oxygen_updated(new_oxygen_level: float) -> void:
 
 func _on_cycles_updated(current_cycles: int, target_cycles: int) -> void:
 	hud.update_cycle_counts(current_cycles, target_cycles)
+	
+	if current_cycles == target_cycles:
+		_handle_level_over()
 
 func _on_ready_to_blink():
 	hud.play_fade_animation()
@@ -85,6 +88,14 @@ func _on_action1_updated(is_active: bool, prompt_text: String, cost: int):
 	
 func _on_action2_updated(is_active: bool, prompt_text: String, cost: int):
 	hud.update_action_2_prompt(is_active, prompt_text, cost)
+
+func _handle_level_over():
+	grid.update_oxygen_level()
+	
+	var success : bool = grid.oxygen_level >= grid.target_oxygen_level
+	if TileGlobals.cur_testing_level:
+		_return_to_puzzle_editor(success)
+	
 
 func _return_to_puzzle_editor(success: bool):
 	TileGlobals.test_passed = success
