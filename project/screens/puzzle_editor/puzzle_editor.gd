@@ -2,6 +2,7 @@ class_name PuzzleEditor
 extends Node2D
 
 @export var play_menu: PackedScene
+@export var game_scene: PackedScene
 @export var tile_button_class: PackedScene
 @onready var grid:Grid = $Grid
 @onready var interface_layer: CanvasLayer = %InterfaceLayer
@@ -20,12 +21,21 @@ var selected_tile: Tile
 var player_start_loc: Vector2 = Vector2(0, 0)
 var cur_tile_button: TileButton
 
+func _generate_level() -> LevelDefinition:
+	var level: LevelDefinition = grid.export_to_resource()
+	level.start_location = Vector2i(player_start_loc.x, player_start_loc.y)
+	level.name = planet_name
+	level.difficulty = difficulty
+	level.time_until_humans = time_until_humans
+	return level
+
 func _on_test_button_pressed() -> void:
-	pass # Replace with function body.
+	TileGlobals.cur_testing_level = _generate_level()
+	TileGlobals.test_passed = false
+	get_tree().change_scene_to_packed(game_scene)
 
 func _on_save_button_pressed() -> void:
-	var resource = grid.export_to_resource()
-	resource.name = planet_name
+	var resource = _generate_level()
 	var path : String = "res://resources/levels/%s.tres" % planet_name
 	var error := ResourceSaver.save(resource, path)
 	if error:

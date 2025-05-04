@@ -1,5 +1,8 @@
 extends Node
 
+var cur_testing_level = null
+var test_passed = false
+
 enum TILE_TYPE {
 	GROUND, 
 	SEED,

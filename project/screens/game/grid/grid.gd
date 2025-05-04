@@ -12,7 +12,7 @@ var game: GameScript
 var current_tiles: Array[Array]
 var oxygen_level: float = 0.0
 var current_cycle: int = 0
-var target_cycle: int = 2
+var target_cycle: int = 1
 
 signal on_mouse_entered_tile(tile:Tile)
 signal oxygen_updated(new_oxygen_level: float)
@@ -109,11 +109,15 @@ func canMove(x: int, y: int) -> bool:
 func is_valid_tile_loc(x: int, y: int) -> bool:
 	return x >= 0 and x < grid_width and y >= 0 and y < grid_height
 		
-func initialize(inGame: GameScript):
+func initialize(inGame: GameScript, level_definition: LevelDefinition = null):
 	game = inGame
-	build_grid(grid_width, grid_height)
+	if level_definition != null:
+		import_from_resource(level_definition)
+	else: 
+		build_grid(grid_width, grid_height)
 	
 func build_grid(width, height):
+	clear_grid()
 	grid_width = width
 	grid_height = height
 	
@@ -189,7 +193,6 @@ func export_to_resource(level_data : LevelDefinition = null) -> LevelDefinition:
 	return level_data	
 
 func import_from_resource(level_data : LevelDefinition) -> void:
-	clear_grid()
 	build_grid(level_data.grid_width, level_data.grid_height)
 	
 	for y in range(grid_height):

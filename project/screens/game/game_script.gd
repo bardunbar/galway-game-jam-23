@@ -19,22 +19,40 @@ func _input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	# Initialize the player and grid
-	grid.initialize(self)
-	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
+	setup_grid(starting_level)
+	
+	# initialize player connections
 	player.connect("action_points_changed", _on_action_points_changed)
 	player.connect("ready_to_blink", _on_ready_to_blink)
 	player.connect("action1_updated", _on_action1_updated)
 	player.connect("action2_updated", _on_action2_updated)
-	player.initialize(self)
+	
+	# initialize hud and connections
 	hud.update_action_points(action_points, action_points)
 	hud.on_mid_blink.connect(_on_mid_blink)
+	
+	# initialize camera
+	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
+	
+	# initialize grid connections
+	grid.connect("oxygen_updated", _on_oxygen_updated)
+	grid.connect("cycles_updated", _on_cycles_updated)
+
+
+func setup_demo_grid() -> void:
+	grid.initialize(self)
 	grid.make_random_tiles(3, TileGlobals.TILE_TYPE.TOXIC)
 	grid.make_random_tiles(1, TileGlobals.TILE_TYPE.WATER)
 	grid.make_random_tiles(3, TileGlobals.TILE_TYPE.ROCK)
-	grid.connect("oxygen_updated", _on_oxygen_updated)
-	grid.connect("cycles_updated", _on_cycles_updated)
+
+func setup_grid(level_definition: LevelDefinition = null) -> void:
+	if level_definition == null:
+		setup_demo_grid()
+	else:
+		grid.initialize(self, level_definition)
+	
+	player.initialize(self)
 	grid.first_cycle()
-	return
 
 func _on_action_points_changed(new_action_points: int):
 	hud.update_action_points(new_action_points, action_points)

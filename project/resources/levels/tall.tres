@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelDefinition" load_steps=2 format=3 uid="uid://x1g1oh7sd8cr"]
+
+[ext_resource type="Script" uid="uid://deuc2ck6yfkxb" path="res://resources/scripts/level_definition_script.gd" id="1_efigd"]
+
+[resource]
+script = ExtResource("1_efigd")
+name = "tall"
+grid_width = 8
+grid_height = 7
+start_location = Vector2i(0, 0)
+grid_data = Array[int]([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
