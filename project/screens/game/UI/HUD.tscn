@@ -231,6 +231,12 @@ text = "    BATTERY:"
 layout_mode = 2
 text = "10"
 
+[node name="Action1Container2" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
+layout_mode = 2
+
+[node name="Action2Container2" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
+layout_mode = 2
+
 [node name="ScoresContainer" type="VBoxContainer" parent="InterfaceLayer"]
 anchors_preset = 1
 anchor_left = 1.0
@@ -276,7 +282,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("7_he8m2")
 text = "0%"
 
-[node name="Prompts" type="HBoxContainer" parent="InterfaceLayer"]
+[node name="Prompts2" type="HBoxContainer" parent="InterfaceLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -291,55 +297,6 @@ grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
-
-[node name="Action1Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
-layout_mode = 2
-
-[node name="Action1Input" type="TextureRect" parent="InterfaceLayer/Prompts/Action1Container"]
-layout_mode = 2
-texture = ExtResource("2_vlq7e")
-
-[node name="Action1Prompt" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_he8m2")
-text = "10"
-
-[node name="Action1CostText" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_he8m2")
-text = "    COST:"
-
-[node name="Action1Cost" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_he8m2")
-text = "10"
-
-[node name="Action2Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
-layout_mode = 2
-
-[node name="Action1Cost2" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_he8m2")
-text = "       "
-
-[node name="Action2Input" type="TextureRect" parent="InterfaceLayer/Prompts/Action2Container"]
-layout_mode = 2
-texture = ExtResource("3_74e8q")
-
-[node name="Action2Prompt" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_he8m2")
-text = "10"
-
-[node name="Action2CostText" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_he8m2")
-text = "    COST:"
-
-[node name="Action2Cost" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_he8m2")
-text = "10"
 
 [node name="BlinkNode" type="Control" parent="InterfaceLayer"]
 layout_mode = 3
