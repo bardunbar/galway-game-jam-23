@@ -10,9 +10,9 @@ extends Node2D
 
 var game: GameScript
 var current_tiles: Array[Array]
-
 var oxygen_level: float = 0.0
 
+signal on_mouse_entered_tile(tile:Tile)
 signal oxygen_updated(new_oxygen_level: float)
 
 func make_random_tiles(num_tiles: int, tile_action: TileGlobals.TILE_TYPE):
@@ -81,7 +81,7 @@ func doAction(x: int, y: int, action_name: TileGlobals.TILE_ACTION):
 		tile.do_action(action_name)
 	
 func getStartingLocation() -> Vector2:
-	return get_tile(startingGridLocation.x, startingGridLocation.y).global_position
+	return get_tile(int(startingGridLocation.x), int(startingGridLocation.y)).global_position
 	
 func canMove(x: int, y: int) -> bool:
 	if !is_valid_tile_loc(x, y):
@@ -133,6 +133,7 @@ func build_grid(width, height):
 				tile = current_tiles[i][j]
 			if tile == null:
 				tile = tile_class.instantiate() as Tile
+				tile.connect("on_mouse_entered_tile", _on_mouse_entered_tile)
 				current_tiles[i].append(tile)
 				add_child(tile)
 			tile.position.x = (tile_size * (j + 0.5))
@@ -158,6 +159,9 @@ func get_grid_tile_width():
 
 func get_grid_tile_height():
 	return grid_height * tile_size
+	
+func _on_mouse_entered_tile(tile:Tile):
+	on_mouse_entered_tile.emit(tile)
 
 func export_to_resource(level_data : LevelDefinition = null) -> LevelDefinition:
 	if level_data == null:
@@ -167,7 +171,7 @@ func export_to_resource(level_data : LevelDefinition = null) -> LevelDefinition:
 	level_data.grid_data.resize(grid_height * grid_width)
 	for y in range(grid_height):
 		for x in range(grid_width):
-			level_data.grid_data[x + grid_height * grid_width] = current_tiles[x][y].current_state
+			level_data.grid_data[x + y * grid_width] = current_tiles[y][x].current_state
 	
 	return level_data	
 
@@ -179,5 +183,5 @@ func import_from_resource(level_data : LevelDefinition) -> void:
 		for x in range(grid_width):
 			var type : TileGlobals.TILE_TYPE = level_data.grid_data[x + grid_height * grid_width]
 			var cur_tile : Tile = get_tile(x, y)
-			cur_tile
+			cur_tile.set_tile_type(type)
 	

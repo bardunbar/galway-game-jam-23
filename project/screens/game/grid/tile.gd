@@ -1,5 +1,5 @@
 class_name Tile
-extends Node2D
+extends Area2D
 
 @onready var current_texture_component: Sprite2D = $CurrentTexture
 @onready var highlight_texture_component: Sprite2D = $HighlightTexture
@@ -15,11 +15,14 @@ extends Node2D
 @export var highlight_texture: Texture 
 
 var tile_textures : Dictionary[TileGlobals.TILE_TYPE, Texture] = {}
+var tile_definitions : TileDefinitions = null
 
 var grid: Grid
 var grid_position: Vector2 = Vector2.ZERO
 var current_state: TileGlobals.TILE_TYPE
 var pending_actions: Array[TileGlobals.TILE_ACTION]
+
+signal on_mouse_entered_tile(tile:Tile)
 
 func blink() -> void:	
 	if pending_actions.find(TileGlobals.TILE_ACTION.TOXIC) != -1:
@@ -54,16 +57,7 @@ func spread_water(tile: Tile):
 	return
 
 func setup_texture_dict():
-	tile_textures = {
-	TileGlobals.TILE_TYPE.GROUND : ground_texture,
-	TileGlobals.TILE_TYPE.WATER : water_texture,
-	TileGlobals.TILE_TYPE.TOXIC : toxic_texture,
-	TileGlobals.TILE_TYPE.IRRIGATED : watered_ground_texture,
-	TileGlobals.TILE_TYPE.SEED : seed_texture,
-	TileGlobals.TILE_TYPE.TREE : tree_texture,
-	TileGlobals.TILE_TYPE.HOLE : hole_texture,
-	TileGlobals.TILE_TYPE.ROCK : rock_texture,
-}
+	tile_textures = TileGlobals.tile_defintions.texture_map
 
 func _ready() -> void:
 	setup_texture_dict()
@@ -210,3 +204,7 @@ func _get_diagonal_tiles() -> Array[Tile]:
 	diagonal_tiles.append(grid.get_tile(int(grid_position.x - 1), int(grid_position.y + 1)))
 	
 	return diagonal_tiles
+
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event.is_action_pressed("mouse_down") and event is InputEventMouseButton:
+		on_mouse_entered_tile.emit(self)
