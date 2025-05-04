@@ -81,7 +81,7 @@ func doAction(x: int, y: int, action_name: TileGlobals.TILE_ACTION):
 		tile.do_action(action_name)
 	
 func getStartingLocation() -> Vector2:
-	return get_tile(startingGridLocation.x, startingGridLocation.y).global_position
+	return get_tile(int(startingGridLocation.x), int(startingGridLocation.y)).global_position
 	
 func canMove(x: int, y: int) -> bool:
 	if !is_valid_tile_loc(x, y):
@@ -171,7 +171,7 @@ func export_to_resource(level_data : LevelDefinition = null) -> LevelDefinition:
 	level_data.grid_data.resize(grid_height * grid_width)
 	for y in range(grid_height):
 		for x in range(grid_width):
-			level_data.grid_data[x + grid_height * grid_width] = current_tiles[x][y].current_state
+			level_data.grid_data[x + y * grid_width] = current_tiles[y][x].current_state
 	
 	return level_data	
 
@@ -183,5 +183,5 @@ func import_from_resource(level_data : LevelDefinition) -> void:
 		for x in range(grid_width):
 			var type : TileGlobals.TILE_TYPE = level_data.grid_data[x + grid_height * grid_width]
 			var cur_tile : Tile = get_tile(x, y)
-			cur_tile
+			cur_tile.set_tile_type(type)
 	

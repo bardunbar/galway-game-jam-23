@@ -28,6 +28,8 @@ class TileActionInformation:
 		name = in_name
 		cost = in_cost
 
+var tile_defintions : TileDefinitions = preload("res://resources/tile_definitions.tres")
+
 var tile_action_information: Dictionary[TILE_ACTION, TileActionInformation] = {
 	TILE_ACTION.CLEAN: TileActionInformation.new("clean", 2),
 	TILE_ACTION.WATER: TileActionInformation.new("water", 2),

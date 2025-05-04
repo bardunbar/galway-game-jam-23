@@ -4,17 +4,10 @@ extends Area2D
 @onready var current_texture_component: Sprite2D = $CurrentTexture
 @onready var highlight_texture_component: Sprite2D = $HighlightTexture
 
-@export var ground_texture: Texture
-@export var water_texture: Texture
-@export var toxic_texture: Texture
-@export var watered_ground_texture: Texture
-@export var seed_texture: Texture
-@export var tree_texture: Texture
-@export var hole_texture: Texture
-@export var rock_texture: Texture
 @export var highlight_texture: Texture 
 
 var tile_textures : Dictionary[TileGlobals.TILE_TYPE, Texture] = {}
+var tile_definitions : TileDefinitions = null
 
 var grid: Grid
 var grid_position: Vector2 = Vector2.ZERO
@@ -56,16 +49,7 @@ func spread_water(tile: Tile):
 	return
 
 func setup_texture_dict():
-	tile_textures = {
-	TileGlobals.TILE_TYPE.GROUND : ground_texture,
-	TileGlobals.TILE_TYPE.WATER : water_texture,
-	TileGlobals.TILE_TYPE.TOXIC : toxic_texture,
-	TileGlobals.TILE_TYPE.IRRIGATED : watered_ground_texture,
-	TileGlobals.TILE_TYPE.SEED : seed_texture,
-	TileGlobals.TILE_TYPE.TREE : tree_texture,
-	TileGlobals.TILE_TYPE.HOLE : hole_texture,
-	TileGlobals.TILE_TYPE.ROCK : rock_texture,
-}
+	tile_textures = TileGlobals.tile_defintions.texture_map
 
 func _ready() -> void:
 	setup_texture_dict()
@@ -79,7 +63,7 @@ func set_tile_type(tile_type : TileGlobals.TILE_TYPE):
 	if tile_textures.has(tile_type):
 		current_texture_component.texture = tile_textures[tile_type]
 	else:
-		current_texture_component.texture = ground_texture
+		current_texture_component.texture = null
 		
 	
 

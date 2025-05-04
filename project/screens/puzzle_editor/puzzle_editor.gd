@@ -10,7 +10,7 @@ extends Node2D
 @onready var player_sprite:Sprite2D = $PlayerLocation
 @onready var is_player_toggle:CheckButton = $InterfaceLayer/TileOptionsContainer/IsPlayer
 
-var planet_name: String = "Planet X"
+var planet_name: String = "PlanetX"
 var grid_width: int = 1
 var grid_height: int = 1
 var difficulty: int = 1
@@ -22,7 +22,12 @@ func _on_test_button_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_save_button_pressed() -> void:
-	pass # Replace with function body.
+	var resource = grid.export_to_resource()
+	resource.name = planet_name
+	var path : String = "res://%s.tres" % planet_name
+	var error := ResourceSaver.save(resource, path)
+	if error:
+		print("An error happened while saving data: ", error)
 
 func _ready() -> void:
 	grid.build_grid(grid_width, grid_height)
