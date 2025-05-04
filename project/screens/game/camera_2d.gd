@@ -4,8 +4,8 @@ extends Camera2D
 @export var buffer: float
 @export var base_zoom: float
 
-var grid_width
-var grid_height
+var grid_width = 0
+var grid_height = 0
 var window_size
 
 func zoom_to_fit(width: int, height: int):
@@ -30,6 +30,8 @@ func zoom_to_fit(width: int, height: int):
 	return
 
 func _process(delta: float) -> void:
+	if grid_height == 0:
+		return
 	if get_viewport().get_visible_rect().size != window_size:
 		zoom_to_fit(grid_width, grid_height)
 	return

@@ -76,13 +76,13 @@ func processInput() -> void:
 					return
 			
 		var movementDirection: Vector2i = Vector2i.ZERO
-		if Input.is_action_pressed("move_right"):
+		if Input.is_action_just_pressed("move_right"):
 			movementDirection.x = 1
-		elif Input.is_action_pressed("move_left"):
+		elif Input.is_action_just_pressed("move_left"):
 			movementDirection.x = -1
-		elif Input.is_action_pressed("move_down"):
+		elif Input.is_action_just_pressed("move_down"):
 			movementDirection.y = 1
-		elif Input.is_action_pressed("move_up"):
+		elif Input.is_action_just_pressed("move_up"):
 			movementDirection.y = -1
 		if movementDirection != Vector2i.ZERO:
 			if movementDirection != orientation:
