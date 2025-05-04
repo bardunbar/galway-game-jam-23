@@ -9,6 +9,7 @@ func _ready() -> void:
 	
 	resume_button.pressed.connect(_on_resume_button_pressed)
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
+	quit_button.visible = not OS.has_feature("web")
 	quit_button.pressed.connect(_on_quit_button_pressed)
 	
 func _on_resume_button_pressed() -> void:
