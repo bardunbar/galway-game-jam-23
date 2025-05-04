@@ -116,6 +116,7 @@ func initialize(inGame: GameScript, level_definition: LevelDefinition = null):
 		import_from_resource(level_definition)
 	else: 
 		build_grid(grid_width, grid_height)
+		current_cycle = 0
 	
 func build_grid(width, height, clear = true):
 	if clear:

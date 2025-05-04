@@ -18,6 +18,7 @@ extends Control
 @onready var continue_button:Button = $InterfaceLayer/LevelOver/HBoxContainer/ContinueButton
 @onready var restart_button:Button = $InterfaceLayer/LevelOver/HBoxContainer/RestartButton
 @onready var quit_button:Button = $InterfaceLayer/LevelOver/HBoxContainer/QuitButton
+@onready var ship_icon:TextureRect = $InterfaceLayer/ScoresContainer/CyclesRemaining/Ship
 
 signal on_mid_blink
 
@@ -44,7 +45,7 @@ func update_action_2_prompt(is_active: bool, prompt_text: String, cost: int):
 
 func update_cycle_counts(current_cycle: int, total_cycles: int) -> void:
 	var num_paths = cycles_remaining.get_child_count() - 3
-	var needed_paths = total_cycles - current_cycle - 1
+	var needed_paths = max(total_cycles - current_cycle - 1, 0)
 	if num_paths < needed_paths:
 		for i in range(needed_paths - num_paths):
 			var new_path : TextureRect = path_prototype.duplicate()
@@ -60,12 +61,14 @@ func update_cycle_counts(current_cycle: int, total_cycles: int) -> void:
 				path.queue_free()
 
 func show_level_over(success : bool) -> void:
+	ship_icon.visible = false
 	level_over_container.visible = true
 	failure_label.visible = !success
 	success_label.visible = success
 	continue_button.visible = success
 	
 func hide_level_over() -> void:
+	ship_icon.visible = true
 	level_over_container.visible = false
 
 func play_fade_animation():
