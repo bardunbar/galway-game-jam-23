@@ -4,9 +4,9 @@ extends Node2D
 @export var puzzle_editor_scene: PackedScene
 @export var skip_to_game: bool = false
 
-@onready var play_button: Button = %PlayButton
-@onready var editor_button: Button = %PuzzleEditor
-@onready var quit_button: Button = %QuitButton
+@onready var play_button: Button = $MenuUI/CenterContainer/UIContainer/ControlContainer/PlayButton
+@onready var editor_button: Button = $MenuUI/CenterContainer/UIContainer/ControlContainer/PuzzleEditor
+@onready var quit_button: Button = $MenuUI/CenterContainer/UIContainer/ControlContainer/QuitButton
 
 func _ready() -> void:
 	play_button.grab_focus()

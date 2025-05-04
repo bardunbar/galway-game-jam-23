@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cg2pqihw6wjud"]
 
 [ext_resource type="Script" uid="uid://uo5g3ojn10ra" path="res://screens/main_menu/main_menu_script.gd" id="1_givtq"]
-[ext_resource type="Texture2D" uid="uid://ch2c0uus03qn6" path="res://assets/textures/godot_logo.png" id="1_lgj5r"]
 [ext_resource type="PackedScene" uid="uid://cfnef885bvt5u" path="res://screens/game/game_scene.tscn" id="2_6iutv"]
 [ext_resource type="PackedScene" uid="uid://cuxgy6siierjg" path="res://screens/puzzle_editor/puzzle_editor.tscn" id="3_otqs2"]
+[ext_resource type="FontFile" uid="uid://dl7ft0c6fs5vb" path="res://assets/fonts/Kenney Future.ttf" id="4_otqs2"]
 
 [node name="MainMenuScene" type="Node2D"]
 script = ExtResource("1_givtq")
@@ -20,23 +20,37 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuUI/CenterContainer"]
+[node name="UIContainer" type="VBoxContainer" parent="MenuUI/CenterContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MenuUI/CenterContainer/VBoxContainer"]
+[node name="TitleContainer" type="VBoxContainer" parent="MenuUI/CenterContainer/UIContainer"]
 layout_mode = 2
-texture = ExtResource("1_lgj5r")
-expand_mode = 4
 
-[node name="PlayButton" type="Button" parent="MenuUI/CenterContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="BlinkTitle" type="Label" parent="MenuUI/CenterContainer/UIContainer/TitleContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_otqs2")
+theme_override_font_sizes/font_size = 100
+text = "[ B.L.I.N.K. ]"
+horizontal_alignment = 1
+
+[node name="BlinkDescription" type="Label" parent="MenuUI/CenterContainer/UIContainer/TitleContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_otqs2")
+theme_override_font_sizes/font_size = 30
+text = "Bringing Life Info New Kingdoms"
+horizontal_alignment = 1
+
+[node name="ControlContainer" type="VBoxContainer" parent="MenuUI/CenterContainer/UIContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="MenuUI/CenterContainer/UIContainer/ControlContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../PuzzleEditor")
 text = "Play Game"
 
-[node name="PuzzleEditor" type="Button" parent="MenuUI/CenterContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="PuzzleEditor" type="Button" parent="MenuUI/CenterContainer/UIContainer/ControlContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 focus_neighbor_top = NodePath("../PlayButton")
@@ -44,8 +58,7 @@ focus_neighbor_bottom = NodePath("../QuitButton")
 text = "Puzzle Editor
 "
 
-[node name="QuitButton" type="Button" parent="MenuUI/CenterContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="QuitButton" type="Button" parent="MenuUI/CenterContainer/UIContainer/ControlContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 focus_neighbor_top = NodePath("../PuzzleEditor")
