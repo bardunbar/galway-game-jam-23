@@ -96,6 +96,8 @@ layout_mode = 2
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 script = ExtResource("3_ajwto")
+buffer = 100.0
+base_zoom = 1.0
 
 [node name="PlayerLocation" type="Sprite2D" parent="."]
 scale = Vector2(0.4, 0.4)

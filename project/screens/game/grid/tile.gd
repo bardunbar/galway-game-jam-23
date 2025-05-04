@@ -199,3 +199,4 @@ func _get_diagonal_tiles() -> Array[Tile]:
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("mouse_down") and event is InputEventMouseButton:
 		on_mouse_entered_tile.emit(self)
+		print("mouse clicked")
