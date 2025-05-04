@@ -50,5 +50,6 @@ var levels = [
 	"FirstDig",
 	"FirstToxins",
 	"ToxinCleanup",
-	"Sacrifice"
+	"Sacrifice",
+	"MassCleanup"
 ]
