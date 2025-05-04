@@ -11,6 +11,11 @@ extends Node2D
 @onready var tile_options_grid:GridContainer = $InterfaceLayer/TileOptionsContainer/TileGrid
 @onready var player_sprite:Sprite2D = $PlayerLocation
 @onready var is_player_toggle:CheckButton = $InterfaceLayer/TileOptionsContainer/IsPlayer
+@onready var planet_name_input:LineEdit = $InterfaceLayer/VBoxContainer/PlanetName
+@onready var grid_width_rotator:Rotator = $InterfaceLayer/VBoxContainer/GridWidth
+@onready var grid_height_rotator:Rotator = $InterfaceLayer/VBoxContainer/GridHeight
+@onready var difficutly_rotator:Rotator = $InterfaceLayer/VBoxContainer/Difficulty
+@onready var time_until_humans_rotator:Rotator = $InterfaceLayer/VBoxContainer/TimeUntilHumans
 
 var planet_name: String = "PlanetX"
 var grid_width: int = 1
@@ -42,6 +47,11 @@ func _on_save_button_pressed() -> void:
 		print("An error happened while saving data: ", error)
 
 func _ready() -> void:
+	if TileGlobals.cur_testing_level != null:
+		_setup_level(TileGlobals.cur_testing_level)
+		TileGlobals.cur_testing_level = null
+		# TODO: check failure
+		
 	_update_grid()
 	grid.connect("on_mouse_entered_tile", _on_new_tile_selected)
 	# Build Tile options grid
@@ -65,7 +75,21 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_open_play_menu"):
 		interface_layer.add_child(play_menu.instantiate())
 		get_viewport().set_input_as_handled()
-		
+	var movementDirection: Vector2i = Vector2i.ZERO
+	if event.is_action_pressed("move_right"):
+		movementDirection.x = 1
+	elif event.is_action_pressed("move_left"):
+		movementDirection.x = -1
+	elif event.is_action_pressed("move_down"):
+		movementDirection.y = 1
+	elif event.is_action_pressed("move_up"):
+		movementDirection.y = -1
+	if movementDirection != Vector2i.ZERO:
+		var new_pos = Vector2.ZERO
+		if selected_tile != null:
+			new_pos = selected_tile.grid_position + Vector2(movementDirection.x, movementDirection.y)
+		if grid.is_valid_tile_loc(new_pos.x, new_pos.y):
+			_on_new_tile_selected(grid.get_tile(new_pos.x, new_pos.y))
 		
 func _on_new_tile_selected(tile: Tile):
 	if selected_tile != null:
@@ -93,7 +117,22 @@ func _on_planet_name_text_submitted(new_text: String) -> void:
 	var planet_path = "res://resources/levels/%s.tres" % planet_name
 	if ResourceLoader.exists(planet_path):
 		var definition : LevelDefinition = load(planet_path)
-		grid.import_from_resource(definition)
+		_setup_level(definition)
+
+func _setup_level(level: LevelDefinition):
+	grid.import_from_resource(level)
+	planet_name = level.name
+	grid_width = level.grid_width
+	grid_height = level.grid_height
+	difficulty = level.difficulty
+	time_until_humans = level.time_until_humans
+	player_start_loc = Vector2(level.start_location.x, level.start_location.y)
+	
+	planet_name_input.text = planet_name
+	grid_width_rotator.set_value(grid_width)
+	grid_height_rotator.set_value(grid_height)
+	difficutly_rotator.set_value(difficulty)
+	time_until_humans_rotator.set_value(time_until_humans)
 
 func _on_grid_width_value_changed(new_value: int) -> void:
 	grid_width = new_value
