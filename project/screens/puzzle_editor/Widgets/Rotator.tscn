@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://c43y5ruhaatip"]
+
+[ext_resource type="Script" uid="uid://q380t7uhfvvn" path="res://screens/puzzle_editor/Widgets/rotator.gd" id="1_s2iq7"]
+
+[node name="Rotator" type="HBoxContainer"]
+script = ExtResource("1_s2iq7")
+label = "Test Label"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+
+[node name="Prev" type="Button" parent="."]
+layout_mode = 2
+text = "<
+"
+
+[node name="Value" type="Label" parent="."]
+layout_mode = 2
+
+[node name="Next" type="Button" parent="."]
+layout_mode = 2
+text = ">
+"
+
+[connection signal="pressed" from="Prev" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]

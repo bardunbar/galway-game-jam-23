@@ -10,6 +10,7 @@ extends Node2D
 @onready var player:Player = $Player
 @onready var hud:HUD = $Hud
 @onready var camera:GameCamera = $Camera2D
+@onready var blink_sfx:AudioStreamPlayer2D = $BlinkSFX
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_open_play_menu"):
@@ -47,8 +48,10 @@ func _on_ready_to_blink():
 	
 func _on_mid_blink():
 	player.curActionPoints = action_points
+	player.reset()
 	hud.update_action_points(action_points, action_points)
 	grid.blink()
+	blink_sfx.play()
 
 func _on_action1_updated(is_active: bool, prompt_text: String, cost: int):
 	hud.update_action_1_prompt(is_active, prompt_text, cost)

@@ -1,9 +1,66 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7htpu5jt4t3"]
+[gd_scene load_steps=8 format=3 uid="uid://b7htpu5jt4t3"]
 
-[ext_resource type="Texture2D" uid="uid://ch2c0uus03qn6" path="res://assets/textures/godot_logo.png" id="1_24xae"]
+[ext_resource type="Script" uid="uid://bi6r0conrx3a" path="res://screens/game/player.gd" id="1_5unck"]
+[ext_resource type="Texture2D" uid="uid://dxu06wcr35n26" path="res://assets/textures/spritesheet_robotsTop.png" id="1_24xae"]
+[ext_resource type="AudioStream" uid="uid://cmiatyat7irk6" path="res://assets/sounds/sfx/interact.ogg" id="3_qk4c7"]
+[ext_resource type="AudioStream" uid="uid://d0yej8xaw17en" path="res://assets/sounds/sfx/low_on_battery.ogg" id="4_64xwq"]
+
+[sub_resource type="Animation" id="Animation_24xae"]
+resource_name = "low_on_battery"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5unck"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5unck"]
+_data = {
+&"RESET": SubResource("Animation_5unck"),
+&"low_on_battery": SubResource("Animation_24xae")
+}
 
 [node name="Player" type="Node2D"]
+script = ExtResource("1_5unck")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_24xae")
+region_enabled = true
+region_rect = Rect2(0, 0, 148.745, 154.383)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5unck")
+}
+
+[node name="InteractSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qk4c7")
+
+[node name="LowOnBatterySFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_64xwq")
+volume_db = 5.0
+parameters/looping = true
