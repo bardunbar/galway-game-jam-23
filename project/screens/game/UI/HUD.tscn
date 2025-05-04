@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://doruyts8emj2g"]
+[gd_scene load_steps=7 format=3 uid="uid://doruyts8emj2g"]
 
 [ext_resource type="Script" uid="uid://dgimsfcu1ush7" path="res://screens/game/UI/hud.gd" id="1_uiap5"]
+[ext_resource type="Texture2D" uid="uid://btp3bax34ts4e" path="res://assets/ui/keyboard_space.png" id="2_vlq7e"]
+[ext_resource type="Texture2D" uid="uid://y7cn3jrtghs4" path="res://assets/ui/keyboard_ctrl.png" id="3_74e8q"]
 
 [sub_resource type="Animation" id="Animation_vlq7e"]
 length = 0.001
@@ -127,9 +129,9 @@ alignment = 1
 [node name="Action1Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
 layout_mode = 2
 
-[node name="Action1Input" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
+[node name="Action1Input" type="TextureRect" parent="InterfaceLayer/Prompts/Action1Container"]
 layout_mode = 2
-text = "[SPACE]"
+texture = ExtResource("2_vlq7e")
 
 [node name="Action1Prompt" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
 layout_mode = 2
@@ -146,9 +148,9 @@ text = "10"
 [node name="Action2Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
 layout_mode = 2
 
-[node name="Action2Input" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+[node name="Action2Input" type="TextureRect" parent="InterfaceLayer/Prompts/Action2Container"]
 layout_mode = 2
-text = "     [CTRL]"
+texture = ExtResource("3_74e8q")
 
 [node name="Action2Prompt" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
 layout_mode = 2
