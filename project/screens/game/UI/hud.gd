@@ -49,8 +49,9 @@ func update_cycle_counts(current_cycle: int, total_cycles: int) -> void:
 	elif num_paths > needed_paths:
 		for i in range(num_paths - needed_paths):
 			var path = cycles_remaining.get_child(cycles_remaining.get_child_count() - 2)
-			cycles_remaining.remove_child(path)
-			path.queue_free()
+			if path != null:
+				cycles_remaining.remove_child(path)
+				path.queue_free()
 
 func play_fade_animation():
 	if !animation_player.is_playing():

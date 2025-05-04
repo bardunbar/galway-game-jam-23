@@ -11,6 +11,7 @@ extends Node2D
 var game: GameScript
 var current_tiles: Array[Array]
 var oxygen_level: float = 0.0
+var target_oxygen_level = 100.0
 var current_cycle: int = 0
 var target_cycle: int = 1
 
@@ -202,4 +203,6 @@ func import_from_resource(level_data : LevelDefinition) -> void:
 			cur_tile.set_tile_type(type)
 			
 	startingGridLocation = Vector2(level_data.start_location.x, level_data.start_location.y)
+	current_cycle = 0
+	target_cycle = level_data.time_until_humans / 100
 	

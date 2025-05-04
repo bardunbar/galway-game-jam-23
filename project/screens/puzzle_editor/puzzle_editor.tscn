@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cuxgy6siierjg"]
+[gd_scene load_steps=8 format=3 uid="uid://cuxgy6siierjg"]
 
 [ext_resource type="Script" uid="uid://1dxdas2un18v" path="res://screens/puzzle_editor/puzzle_editor.gd" id="1_pbx64"]
 [ext_resource type="PackedScene" uid="uid://c4oy6yui5ffhj" path="res://screens/play_menu/play_menu_scene.tscn" id="2_a1cpp"]
 [ext_resource type="PackedScene" uid="uid://dokrrfb2rfisg" path="res://screens/game/grid/grid.tscn" id="2_ajwto"]
 [ext_resource type="PackedScene" uid="uid://c43y5ruhaatip" path="res://screens/puzzle_editor/Widgets/Rotator.tscn" id="2_iyvlx"]
-[ext_resource type="PackedScene" uid="uid://cfnef885bvt5u" path="res://screens/game/game_scene.tscn" id="3_06gtn"]
 [ext_resource type="Script" uid="uid://cu84ydqg74gso" path="res://screens/game/camera_2d.gd" id="3_ajwto"]
 [ext_resource type="PackedScene" uid="uid://dbcqfyn708l1y" path="res://screens/puzzle_editor/Widgets/TileButton.tscn" id="3_rt0ye"]
 [ext_resource type="Texture2D" uid="uid://dxu06wcr35n26" path="res://assets/textures/spritesheet_robotsTop.png" id="5_raffu"]
@@ -12,7 +11,6 @@
 [node name="PuzzleEditor" type="Node2D"]
 script = ExtResource("1_pbx64")
 play_menu = ExtResource("2_a1cpp")
-game_scene = ExtResource("3_06gtn")
 tile_button_class = ExtResource("3_rt0ye")
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
@@ -94,6 +92,10 @@ text = "Player Here"
 layout_mode = 2
 
 [node name="Grid" parent="." instance=ExtResource("2_ajwto")]
+grid_width = null
+grid_height = null
+tile_size = null
+startingGridLocation = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
