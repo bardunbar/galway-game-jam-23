@@ -49,5 +49,6 @@ var levels = [
 	"WalledInByTrees",
 	"FirstDig",
 	"FirstToxins",
-	"ToxinCleanup"
+	"ToxinCleanup",
+	"Sacrifice"
 ]
