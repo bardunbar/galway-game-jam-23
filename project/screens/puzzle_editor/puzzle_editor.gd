@@ -75,6 +75,7 @@ func _ready() -> void:
 		tile_button.connect("on_tile_button_highlighted", _on_tile_button_highlighted)
 		tile_options_grid.add_child(tile_button)
 
+	save_button.visible = not OS.has_feature("web")
 
 func _update_grid():
 	grid.build_grid(grid_width, grid_height, false)

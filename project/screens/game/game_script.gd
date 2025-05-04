@@ -19,6 +19,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_open_play_menu"):
 		interface_layer.add_child(play_menu.instantiate())
 		get_viewport().set_input_as_handled()
+	
+	if event.is_action_pressed("game_restart"):
+		_on_restart_pressed()
 
 func _ready() -> void:
 	if TileGlobals.cur_testing_level:
