@@ -2,7 +2,7 @@ class_name PuzzleEditor
 extends Node2D
 
 @export var play_menu: PackedScene
-@export var game_scene: PackedScene
+# @export var game_scene: PackedScene
 @export var tile_button_class: PackedScene
 @onready var grid:Grid = $Grid
 @onready var interface_layer: CanvasLayer = %InterfaceLayer
@@ -32,11 +32,11 @@ func _generate_level() -> LevelDefinition:
 func _on_test_button_pressed() -> void:
 	TileGlobals.cur_testing_level = _generate_level()
 	TileGlobals.test_passed = false
-	get_tree().change_scene_to_packed(game_scene)
+	# get_tree().change_scene_to_packed(game_scene)
 
 func _on_save_button_pressed() -> void:
 	var resource = _generate_level()
-	var path : String 
+	var path : String
 	if OS.has_feature("editor"):
 		path = "res://resources/levels/%s.tres" % planet_name
 	else:
@@ -54,23 +54,23 @@ func _ready() -> void:
 		tile_button.set_type(tile_type)
 		tile_button.connect("on_tile_button_highlighted", _on_tile_button_highlighted)
 		tile_options_grid.add_child(tile_button)
-		
-	
+
+
 func _update_grid():
 	grid.build_grid(grid_width, grid_height)
 	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
 	_update_player_pos()
-	
+
 func _update_player_pos():
 	var start_tile = grid.get_tile(player_start_loc.x, player_start_loc.y)
 	player_sprite.global_position = start_tile.global_position
-	
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_open_play_menu"):
 		interface_layer.add_child(play_menu.instantiate())
 		get_viewport().set_input_as_handled()
-		
-		
+
+
 func _on_new_tile_selected(tile: Tile):
 	if selected_tile != null:
 		selected_tile.highlight_tile(false)
