@@ -26,14 +26,12 @@ offset_bottom = 109.0
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-focus_mode = 0
 text = "Save Puzzle"
 
 [node name="TestButton" type="Button" parent="InterfaceLayer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-focus_mode = 0
 text = "Test Puzzle
 "
 

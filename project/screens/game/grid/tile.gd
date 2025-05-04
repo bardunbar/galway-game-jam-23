@@ -7,7 +7,6 @@ extends Area2D
 @export var highlight_texture: Texture 
 
 var tile_textures : Dictionary[TileGlobals.TILE_TYPE, Texture] = {}
-var tile_definitions : TileDefinitions = null
 
 var grid: Grid
 var grid_position: Vector2 = Vector2.ZERO
