@@ -92,10 +92,6 @@ text = "Player Here"
 layout_mode = 2
 
 [node name="Grid" parent="." instance=ExtResource("2_ajwto")]
-grid_width = null
-grid_height = null
-tile_size = null
-startingGridLocation = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

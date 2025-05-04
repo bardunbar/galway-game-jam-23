@@ -2,7 +2,6 @@ class_name GameScript
 extends Node2D
 
 @export var play_menu: PackedScene
-@export var puzzle_editor_scene: PackedScene
 
 @export var action_points: int
 @export var starting_level : LevelDefinition
@@ -95,8 +94,7 @@ func _handle_level_over():
 	var success : bool = grid.oxygen_level >= grid.target_oxygen_level
 	if TileGlobals.cur_testing_level:
 		_return_to_puzzle_editor(success)
-	
 
 func _return_to_puzzle_editor(success: bool):
 	TileGlobals.test_passed = success
-	get_tree().change_scene_to_packed(puzzle_editor_scene)
+	get_tree().change_scene_to_file("res://screens/puzzle_editor/puzzle_editor.tscn")

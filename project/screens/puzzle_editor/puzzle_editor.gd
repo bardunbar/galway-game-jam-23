@@ -37,7 +37,7 @@ func _generate_level() -> LevelDefinition:
 func _on_test_button_pressed() -> void:
 	TileGlobals.cur_testing_level = _generate_level()
 	TileGlobals.test_passed = false
-	# get_tree().change_scene_to_packed(game_scene)
+	get_tree().change_scene_to_file("res://screens/game/game_scene.tscn")
 
 func _on_save_button_pressed() -> void:
 	var resource = _generate_level()
@@ -67,7 +67,7 @@ func _ready() -> void:
 
 
 func _update_grid():
-	grid.build_grid(grid_width, grid_height)
+	grid.build_grid(grid_width, grid_height, false)
 	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
 	_update_player_pos()
 

@@ -117,8 +117,9 @@ func initialize(inGame: GameScript, level_definition: LevelDefinition = null):
 	else: 
 		build_grid(grid_width, grid_height)
 	
-func build_grid(width, height):
-	clear_grid()
+func build_grid(width, height, clear = true):
+	if clear:
+		clear_grid()
 	grid_width = width
 	grid_height = height
 	
