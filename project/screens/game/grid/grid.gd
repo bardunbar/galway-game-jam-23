@@ -200,4 +200,6 @@ func import_from_resource(level_data : LevelDefinition) -> void:
 			var type : TileGlobals.TILE_TYPE = level_data.grid_data[x + y * grid_width]
 			var cur_tile : Tile = get_tile(x, y)
 			cur_tile.set_tile_type(type)
+			
+	startingGridLocation = Vector2(level_data.start_location.x, level_data.start_location.y)
 	

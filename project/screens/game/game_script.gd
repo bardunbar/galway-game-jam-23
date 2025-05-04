@@ -19,7 +19,10 @@ func _input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	# Initialize the player and grid
-	setup_grid(starting_level)
+	if TileGlobals.cur_testing_level:
+		setup_level(TileGlobals.cur_testing_level)
+	else:
+		setup_level(starting_level)
 	
 	# initialize player connections
 	player.connect("action_points_changed", _on_action_points_changed)
@@ -45,7 +48,7 @@ func setup_demo_grid() -> void:
 	grid.make_random_tiles(1, TileGlobals.TILE_TYPE.WATER)
 	grid.make_random_tiles(3, TileGlobals.TILE_TYPE.ROCK)
 
-func setup_grid(level_definition: LevelDefinition = null) -> void:
+func setup_level(level_definition: LevelDefinition = null) -> void:
 	if level_definition == null:
 		setup_demo_grid()
 	else:
