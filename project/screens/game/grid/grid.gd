@@ -10,8 +10,10 @@ extends Node2D
 
 var game: GameScript
 var current_tiles: Array[Array]
+var oxygen_level: float = 0.0
 
 signal on_mouse_entered_tile(tile:Tile)
+signal oxygen_updated(new_oxygen_level: float)
 
 func make_random_tiles(num_tiles: int, tile_action: TileGlobals.TILE_TYPE):
 	for i in range(num_tiles):
@@ -25,12 +27,28 @@ func make_random_tiles(num_tiles: int, tile_action: TileGlobals.TILE_TYPE):
 			tile._do_water_action()
 		elif tile_action == TileGlobals.TILE_TYPE.ROCK:
 			tile.do_rock_action()
+			
+func update_oxygen_level() -> float:
+	var current_oxygen: float = 0.0
+
+	for row in current_tiles:
+		for object in row:
+			var tile: Tile = object as Tile
+
+			if TileGlobals.tile_oxygen_scores.has(tile.current_state):
+				current_oxygen += TileGlobals.tile_oxygen_scores[tile.current_state]
+
+	oxygen_level = current_oxygen
+	oxygen_updated.emit(oxygen_level)
+	return current_oxygen
 
 func blink() -> void:
 	for row in current_tiles:
 		for object in row:
 			var tile: Tile = object as Tile
 			tile.blink()
+			
+	update_oxygen_level()
 			
 func get_num_trees() -> int:
 	return get_tiles_of_type(TileGlobals.TILE_TYPE.TREE).size()
@@ -128,6 +146,14 @@ func build_grid(width, height):
 				current_tiles[i].remove_at(current_tiles[i].size() - 1)
 			
 
+func clear_grid():
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
+	current_tiles.clear()
+	grid_width = 0
+	grid_height = 0
+
 func get_grid_tile_width():
 	return grid_width * tile_size
 
@@ -136,3 +162,26 @@ func get_grid_tile_height():
 	
 func _on_mouse_entered_tile(tile:Tile):
 	on_mouse_entered_tile.emit(tile)
+
+func export_to_resource(level_data : LevelDefinition = null) -> LevelDefinition:
+	if level_data == null:
+		level_data = LevelDefinition.new()
+	level_data.grid_height = grid_height
+	level_data.grid_width = grid_width
+	level_data.grid_data.resize(grid_height * grid_width)
+	for y in range(grid_height):
+		for x in range(grid_width):
+			level_data.grid_data[x + grid_height * grid_width] = current_tiles[x][y].current_state
+	
+	return level_data	
+
+func import_from_resource(level_data : LevelDefinition) -> void:
+	clear_grid()
+	build_grid(level_data.grid_width, level_data.grid_height)
+	
+	for y in range(grid_height):
+		for x in range(grid_width):
+			var type : TileGlobals.TILE_TYPE = level_data.grid_data[x + grid_height * grid_width]
+			var cur_tile : Tile = get_tile(x, y)
+			cur_tile
+	
