@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://doruyts8emj2g"]
+[gd_scene load_steps=11 format=3 uid="uid://doruyts8emj2g"]
 
 [ext_resource type="Script" uid="uid://dgimsfcu1ush7" path="res://screens/game/UI/hud.gd" id="1_uiap5"]
 [ext_resource type="Texture2D" uid="uid://btp3bax34ts4e" path="res://assets/ui/keyboard_space.png" id="2_vlq7e"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bgtpdybg7u2xn" path="res://assets/textures/ui/ship_region.tres" id="4_y3vke"]
 [ext_resource type="Texture2D" uid="uid://big1i0aq6qs0a" path="res://assets/textures/ui/path_region.tres" id="5_he8m2"]
 [ext_resource type="Texture2D" uid="uid://dnacyp8jxxx28" path="res://assets/textures/ui/target_region.tres" id="6_jhgcc"]
+[ext_resource type="FontFile" uid="uid://dl7ft0c6fs5vb" path="res://assets/fonts/Kenney Future.ttf" id="7_he8m2"]
 
 [sub_resource type="Animation" id="Animation_vlq7e"]
 length = 0.001
@@ -33,10 +34,22 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 1000)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InterfaceLayer/BlinkFlavorText:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_uiap5"]
 resource_name = "blink"
-length = 0.8
+length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,7 +57,7 @@ tracks/0/path = NodePath("InterfaceLayer/BlinkNode/TopEyelid:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 0.8),
+"times": PackedFloat32Array(0, 0.2, 1, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, -300), Vector2(0, 0), Vector2(0, 0), Vector2(0, -300)]
@@ -56,7 +69,7 @@ tracks/1/path = NodePath("InterfaceLayer/BlinkNode/BottomEyelid:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 0.8),
+"times": PackedFloat32Array(0, 0.2, 1, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 1000), Vector2(0, 640), Vector2(0, 640), Vector2(0, 1000)]
@@ -68,12 +81,24 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0.6),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"_emit_mid_blink"
 }]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("InterfaceLayer/BlinkFlavorText:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.333333, 0.866667, 1.03333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_74e8q"]
@@ -238,3 +263,31 @@ offset_bottom = 1000.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="BlinkFlavorText" type="VBoxContainer" parent="InterfaceLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -11.5
+offset_right = 69.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BlinkFlavorText1" type="Label" parent="InterfaceLayer/BlinkFlavorText"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
+theme_override_font_sizes/font_size = 48
+text = "[BLINK INITIATED]"
+
+[node name="BlinkFlavorText2" type="Label" parent="InterfaceLayer/BlinkFlavorText"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
+theme_override_font_sizes/font_size = 24
+text = "Mandatory reboot in progress"

@@ -50,6 +50,7 @@ puzzle_editor_scene = ExtResource("3_otqs2")
 [node name="MenuUI" type="CanvasLayer" parent="."]
 
 [node name="CenterContainer" type="CenterContainer" parent="MenuUI"]
+clip_contents = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
