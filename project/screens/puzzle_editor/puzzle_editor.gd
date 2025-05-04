@@ -19,7 +19,7 @@ func _on_test_button_pressed() -> void:
 func _on_save_button_pressed() -> void:
 	var resource = grid.export_to_resource()
 	resource.name = planet_name
-	var path : String = "res://%s.tres" % planet_name
+	var path : String = "res://resources/levels/%s.tres" % planet_name
 	var error := ResourceSaver.save(resource, path)
 	if error:
 		print("An error happened while saving data: ", error)
@@ -42,6 +42,10 @@ func _on_mouse_entered_tile(tile: Tile):
 
 func _on_planet_name_text_submitted(new_text: String) -> void:
 	planet_name = new_text
+	var planet_path = "res://resources/levels/%s.tres" % planet_name
+	if ResourceLoader.exists(planet_path):
+		var definition : LevelDefinition = load(planet_path)
+		grid.import_from_resource(definition)
 
 func _on_grid_width_value_changed(new_value: int) -> void:
 	grid_width = new_value
