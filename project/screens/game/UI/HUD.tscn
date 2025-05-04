@@ -49,7 +49,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_uiap5"]
 resource_name = "blink"
-length = 1.2
+length = 5.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -57,10 +57,10 @@ tracks/0/path = NodePath("InterfaceLayer/BlinkNode/TopEyelid:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0290514, 0.433333, 0.666667, 0.966667, 1.13333, 1.43333, 1.63333, 2, 5, 5.2),
+"transitions": PackedFloat32Array(1, 1, 0.574349, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, -300), Vector2(0, 0), Vector2(0, 0), Vector2(0, -300)]
+"values": [Vector2(0, -300), Vector2(0, -300), Vector2(0, -196.051), Vector2(0, -227.274), Vector2(0, -234.474), Vector2(0, -196.051), Vector2(0, -130.307), Vector2(0, -166.244), Vector2(0, 0), Vector2(0, 0), Vector2(0, -300)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -69,10 +69,10 @@ tracks/1/path = NodePath("InterfaceLayer/BlinkNode/BottomEyelid:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0290514, 0.433333, 0.666667, 0.966667, 1.13333, 1.43333, 1.63333, 2, 5, 5.2),
+"transitions": PackedFloat32Array(1, 1, 0.707107, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 1000), Vector2(0, 640), Vector2(0, 640), Vector2(0, 1000)]
+"values": [Vector2(0, 1000), Vector2(0, 1000), Vector2(0, 875.261), Vector2(0, 908.369), Vector2(0, 918.923), Vector2(0, 875.261), Vector2(0, 796.369), Vector2(0, 839.493), Vector2(0, 640), Vector2(0, 640), Vector2(0, 1000)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -81,7 +81,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.6),
+"times": PackedFloat32Array(2),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -95,11 +95,22 @@ tracks/3/path = NodePath("InterfaceLayer/BlinkFlavorText:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.2, 0.333333, 0.866667, 1.03333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(2, 2.13333, 2.26667, 2.39503, 2.53333, 2.66169, 2.78276, 2.91112, 3.04942, 3.17778, 3.30376, 3.43213, 3.57043, 3.69879, 3.82881, 3.95717, 4.09548, 4.22384, 4.36667, 4.49503, 4.63333, 4.76169, 4.96666),
+"transitions": PackedFloat32Array(1, 1, 0.659754, 1, 0.659754, 1, 0.659754, 1, 0.659754, 1, 0.659754, 1, 0.659754, 1, 0.659754, 1, 0.659754, 1, 0.659754, 1, 0.659754, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Power_Down")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/4/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_74e8q"]
 _data = {
@@ -132,71 +143,19 @@ offset_bottom = 45.0
 
 [node name="ActionPointsTitle" type="Label" parent="InterfaceLayer/ActionPointsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
 text = "BATTERY: "
 
 [node name="ActionPointsValue" type="Label" parent="InterfaceLayer/ActionPointsContainer"]
 layout_mode = 2
-text = "10"
-
-[node name="Prompts" type="HBoxContainer" parent="InterfaceLayer"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -575.0
-offset_top = -71.0
-offset_right = 576.0
-offset_bottom = -31.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="Action1Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
-layout_mode = 2
-
-[node name="Action1Input" type="TextureRect" parent="InterfaceLayer/Prompts/Action1Container"]
-layout_mode = 2
-texture = ExtResource("2_vlq7e")
-
-[node name="Action1Prompt" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
-layout_mode = 2
-text = "10"
-
-[node name="Action1CostText" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
-layout_mode = 2
-text = "    BATTERY:"
-
-[node name="Action1Cost" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
-layout_mode = 2
-text = "10"
-
-[node name="Action2Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
-layout_mode = 2
-
-[node name="Action2Input" type="TextureRect" parent="InterfaceLayer/Prompts/Action2Container"]
-layout_mode = 2
-texture = ExtResource("3_74e8q")
-
-[node name="Action2Prompt" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
-layout_mode = 2
-text = "10"
-
-[node name="Action2CostText" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
-layout_mode = 2
-text = "    BATTERY:"
-
-[node name="Action2Cost" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
-layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
 text = "10"
 
 [node name="ScoresContainer" type="VBoxContainer" parent="InterfaceLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -113.0
+offset_left = -139.0
 offset_top = 16.0
 offset_right = -19.0
 offset_bottom = 56.0
@@ -227,12 +186,79 @@ size_flags_horizontal = 8
 
 [node name="OxygenTitle" type="Label" parent="InterfaceLayer/ScoresContainer/OxygenContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
 text = "Oxygen: "
 
 [node name="OxygenValue" type="Label" parent="InterfaceLayer/ScoresContainer/OxygenContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
 text = "0%"
+
+[node name="Prompts" type="HBoxContainer" parent="InterfaceLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -575.0
+offset_top = -95.0
+offset_right = 576.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Action1Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
+layout_mode = 2
+
+[node name="Action1Input" type="TextureRect" parent="InterfaceLayer/Prompts/Action1Container"]
+layout_mode = 2
+texture = ExtResource("2_vlq7e")
+
+[node name="Action1Prompt" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
+text = "10"
+
+[node name="Action1CostText" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
+text = "    COST:"
+
+[node name="Action1Cost" type="Label" parent="InterfaceLayer/Prompts/Action1Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
+text = "10"
+
+[node name="Action2Container" type="HBoxContainer" parent="InterfaceLayer/Prompts"]
+layout_mode = 2
+
+[node name="Action1Cost2" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
+text = "       "
+
+[node name="Action2Input" type="TextureRect" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+texture = ExtResource("3_74e8q")
+
+[node name="Action2Prompt" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
+text = "10"
+
+[node name="Action2CostText" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
+text = "    COST:"
+
+[node name="Action2Cost" type="Label" parent="InterfaceLayer/Prompts/Action2Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
+text = "10"
 
 [node name="BlinkNode" type="Control" parent="InterfaceLayer"]
 layout_mode = 3
@@ -290,7 +316,15 @@ text = "[BLINK INITIATED]"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_he8m2")
 theme_override_font_sizes/font_size = 24
-text = "Mandatory reboot in progress"
+text = "Recharging battery"
+horizontal_alignment = 1
+
+[node name="BlinkFlavorText3" type="Label" parent="InterfaceLayer/BlinkFlavorText"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_he8m2")
+theme_override_font_sizes/font_size = 24
+text = "100 Years Elapsing"
+horizontal_alignment = 1
 
 [node name="LevelOver" type="VBoxContainer" parent="InterfaceLayer"]
 unique_name_in_owner = true
@@ -337,3 +371,5 @@ text = "Next Level"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"
+
+[node name="Power_Down" type="AudioStreamPlayer" parent="."]
