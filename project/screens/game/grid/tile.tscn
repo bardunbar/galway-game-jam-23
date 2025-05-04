@@ -1,28 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://hv7ajecc3s74"]
+[gd_scene load_steps=6 format=3 uid="uid://hv7ajecc3s74"]
 
 [ext_resource type="Script" uid="uid://defb5quso33t0" path="res://screens/game/grid/tile.gd" id="1_6oxcn"]
 [ext_resource type="Texture2D" uid="uid://ov17un2vb3t7" path="res://assets/textures/earth_placeholder_texture.png" id="2_xi6y3"]
 [ext_resource type="Texture2D" uid="uid://dltlvfkk1u64c" path="res://assets/textures/water_placeholder_texture.png" id="3_3sxbs"]
-[ext_resource type="Texture2D" uid="uid://bsabv8nsvw1q8" path="res://assets/textures/toxic_placeholder_texture.png" id="4_ylbef"]
-[ext_resource type="Texture2D" uid="uid://vv8dwrjj8uey" path="res://assets/textures/earth_watered_placeholder_texture.png" id="5_dfmno"]
 [ext_resource type="Texture2D" uid="uid://baha6cyrx3v11" path="res://assets/textures/TileHighlight.png" id="5_ylbef"]
-[ext_resource type="Texture2D" uid="uid://crw7yk25cjj5y" path="res://assets/textures/seeds_placeholder_texture.png" id="6_f8h2w"]
-[ext_resource type="Texture2D" uid="uid://bepaib6x7j04" path="res://assets/textures/tree_placeholder_texture.png" id="7_q4v6p"]
-[ext_resource type="Texture2D" uid="uid://c6mhwnkcpj0sx" path="res://assets/textures/hole_placeholder_texture.png" id="8_q4v6p"]
-[ext_resource type="Texture2D" uid="uid://b3nuvi7xb8pwm" path="res://assets/textures/rock_placeholder_texture.png" id="9_cbw23"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbw23"]
 
 [node name="Tile" type="Area2D"]
 script = ExtResource("1_6oxcn")
-ground_texture = ExtResource("2_xi6y3")
-water_texture = ExtResource("3_3sxbs")
-toxic_texture = ExtResource("4_ylbef")
-watered_ground_texture = ExtResource("5_dfmno")
-seed_texture = ExtResource("6_f8h2w")
-tree_texture = ExtResource("7_q4v6p")
-hole_texture = ExtResource("8_q4v6p")
-rock_texture = ExtResource("9_cbw23")
 highlight_texture = ExtResource("5_ylbef")
 
 [node name="CurrentTexture" type="Sprite2D" parent="."]
