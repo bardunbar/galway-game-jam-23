@@ -21,19 +21,25 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _ready() -> void:
-	# Initialize the player and grid
 	if TileGlobals.cur_testing_level:
 		current_level = TileGlobals.cur_testing_level
 	else:
 		var first_level_name = TileGlobals.levels[0]
 		current_level = get_level_from_name(first_level_name)
-	setup_level(current_level)
-
+		
+	
+	# initialize grid connections
+	grid.connect("oxygen_updated", _on_oxygen_updated)
+	grid.connect("cycles_updated", _on_cycles_updated)
+	
 	# initialize player connections
 	player.connect("action_points_changed", _on_action_points_changed)
 	player.connect("ready_to_blink", _on_ready_to_blink)
 	player.connect("action1_updated", _on_action1_updated)
 	player.connect("action2_updated", _on_action2_updated)
+	
+	# Initialize the player and grid
+	setup_level(current_level)
 
 	# initialize hud and connections
 	hud.on_mid_blink.connect(_on_mid_blink)
@@ -43,10 +49,6 @@ func _ready() -> void:
 
 	# initialize camera
 	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
-
-	# initialize grid connections
-	grid.connect("oxygen_updated", _on_oxygen_updated)
-	grid.connect("cycles_updated", _on_cycles_updated)
 
 
 func setup_demo_grid() -> void:

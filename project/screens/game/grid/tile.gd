@@ -59,9 +59,13 @@ func _ready() -> void:
 func set_tile_type(tile_type : TileGlobals.TILE_TYPE):
 	current_state = tile_type
 	assert(tile_textures.has(tile_type), "No texture present for tile type %s" % tile_type)
+
+	if tile_type == TileGlobals.TILE_TYPE.TOXIC:
+		do_toxic_action(true)
+
 	if tile_textures.has(tile_type):
 		current_texture_component.texture = tile_textures[tile_type]
-	else:
+	else: 
 		current_texture_component.texture = null
 		
 	
@@ -142,10 +146,11 @@ func _do_water_action():
 			tile.do_irrigate_action()
 	
 func do_toxic_action(spread: bool = true):
-	set_tile_type(TileGlobals.TILE_TYPE.TOXIC)
+	current_state = TileGlobals.TILE_TYPE.TOXIC
+	current_texture_component.texture = tile_textures[TileGlobals.TILE_TYPE.TOXIC]
 
-	var diagonal_tiles: Array[Tile] = _get_diagonal_tiles()
 	if spread:
+		var diagonal_tiles: Array[Tile] = _get_diagonal_tiles()
 		for tile in diagonal_tiles:
 			if tile:
 				tile.pending_actions.append(TileGlobals.TILE_ACTION.TOXIC)
