@@ -27,7 +27,7 @@ func _ready() -> void:
 	else:
 		var first_level_name = TileGlobals.levels[0]
 		current_level = get_level_from_name(first_level_name)
-		setup_level(current_level)
+	setup_level(current_level)
 
 	# initialize player connections
 	player.connect("action_points_changed", _on_action_points_changed)
