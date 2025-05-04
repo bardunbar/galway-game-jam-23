@@ -5,11 +5,16 @@ extends Node2D
 
 enum ACTION_TYPE {NONE, MOVE, ROTATE, ACTION}
 
+@export var movementSpeed = 3
+@export var rotationSpeed = 6
+@export var low_on_action_points_amount = 3
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var player_sprite: Sprite2D = $Sprite2D
+
 var curActionPoints
 var game: GameScript
 var tile_size
-var movementSpeed = 3
-var rotationSpeed = 6
 var curAction = ACTION_TYPE.NONE
 var movementAlpha: float = 0
 var gridPosition: Vector2i
@@ -41,6 +46,8 @@ func initialize(inGame: GameScript):
 func use_action_points(count: int):
 	curActionPoints = max(curActionPoints - count, 0)
 	action_points_changed.emit(curActionPoints)
+	if !animation_player.is_playing() && curActionPoints <= low_on_action_points_amount:
+		animation_player.play("low_on_battery")
 	
 func finish_action():
 	movementAlpha = 0
@@ -99,11 +106,18 @@ func processInput() -> void:
 	return
 
 func orientTo(newOrientation: Vector2):
-	# TODO: rotate sprite
 	set_faced_tile_highlight(false)
 	orientation = newOrientation
 	curAction = ACTION_TYPE.ROTATE
-	return
+	
+	if newOrientation == Vector2.UP:
+		player_sprite.rotation_degrees = 270
+	elif newOrientation == Vector2.DOWN:
+		player_sprite.rotation_degrees = 90
+	elif newOrientation == Vector2.LEFT:
+		player_sprite.rotation_degrees = 180
+	elif newOrientation == Vector2.RIGHT:
+		player_sprite.rotation_degrees = 0
 	
 func set_faced_tile_highlight(is_highlighted):
 	var faced_tile = get_facing_tile()
