@@ -129,7 +129,13 @@ func _on_tile_button_highlighted(tile_button:TileButton):
 
 func _on_planet_name_text_submitted(new_text: String) -> void:
 	planet_name = new_text
-	var planet_path = "res://resources/levels/%s.tres" % planet_name
+	
+	var planet_path : String
+	if OS.has_feature("editor"):
+		planet_path = "res://resources/levels/%s.tres" % planet_name
+	else:
+		planet_path = "user://levels/%s.tres" % planet_name
+	
 	if ResourceLoader.exists(planet_path):
 		var definition : LevelDefinition = load(planet_path)
 		_setup_level(definition)
