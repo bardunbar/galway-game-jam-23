@@ -19,23 +19,25 @@ func _input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	# Initialize the player and grid
-	#setup_demo_grid()
 	setup_grid(starting_level)
 	
+	# initialize player connections
 	player.connect("action_points_changed", _on_action_points_changed)
 	player.connect("ready_to_blink", _on_ready_to_blink)
 	player.connect("action1_updated", _on_action1_updated)
 	player.connect("action2_updated", _on_action2_updated)
-	#player.initialize(self)
+	
+	# initialize hud and connections
 	hud.update_action_points(action_points, action_points)
 	hud.on_mid_blink.connect(_on_mid_blink)
 	
+	# initialize camera
 	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
+	
+	# initialize grid connections
 	grid.connect("oxygen_updated", _on_oxygen_updated)
 	grid.connect("cycles_updated", _on_cycles_updated)
-	
-	#grid.first_cycle()
-	return
+
 
 func setup_demo_grid() -> void:
 	grid.initialize(self)
