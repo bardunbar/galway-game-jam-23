@@ -2,7 +2,6 @@ class_name GameScript
 extends Node2D
 
 @export var play_menu: PackedScene
-@export var puzzle_editor_scene: PackedScene
 
 @export var action_points: int
 @export var starting_level : LevelDefinition
@@ -25,27 +24,27 @@ func _input(event: InputEvent) -> void:
 func _ready() -> void:
 	# Initialize the player and grid
 	if TileGlobals.cur_testing_level:
-		current_level = TileGlobals.cur_testing_level 
+		current_level = TileGlobals.cur_testing_level
 	else:
 		current_level = starting_level
 	setup_level(current_level)
-	
+
 	# initialize player connections
 	player.connect("action_points_changed", _on_action_points_changed)
 	player.connect("ready_to_blink", _on_ready_to_blink)
 	player.connect("action1_updated", _on_action1_updated)
 	player.connect("action2_updated", _on_action2_updated)
-	
+
 	# initialize hud and connections
 	hud.update_action_points(action_points, action_points)
 	hud.on_mid_blink.connect(_on_mid_blink)
 	hud.quit_button.pressed.connect(_on_quit_pressed)
 	hud.restart_button.pressed.connect(_on_restart_pressed)
 	hud.continue_button.pressed.connect(_on_continue_pressed)
-	
+
 	# initialize camera
 	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
-	
+
 	# initialize grid connections
 	grid.connect("oxygen_updated", _on_oxygen_updated)
 	grid.connect("cycles_updated", _on_cycles_updated)
@@ -59,12 +58,12 @@ func setup_demo_grid() -> void:
 
 func setup_level(level_definition: LevelDefinition = null) -> void:
 	hud.hide_level_over()
-	
+
 	if level_definition == null:
 		setup_demo_grid()
 	else:
 		grid.initialize(self, level_definition)
-	
+
 	player.initialize(self)
 	grid.first_cycle()
 	playing = true
@@ -90,13 +89,13 @@ func _on_oxygen_updated(new_oxygen_level: float) -> void:
 
 func _on_cycles_updated(current_cycles: int, target_cycles: int) -> void:
 	hud.update_cycle_counts(current_cycles, target_cycles)
-	
+
 	if current_cycles == target_cycles:
 		_handle_level_over()
 
 func _on_ready_to_blink():
 	hud.play_fade_animation()
-	
+
 func _on_mid_blink():
 	player.curActionPoints = action_points
 	player.reset()
@@ -106,22 +105,21 @@ func _on_mid_blink():
 
 func _on_action1_updated(is_active: bool, prompt_text: String, cost: int):
 	hud.update_action_1_prompt(is_active, prompt_text, cost)
-	
+
 func _on_action2_updated(is_active: bool, prompt_text: String, cost: int):
 	hud.update_action_2_prompt(is_active, prompt_text, cost)
 
 func _handle_level_over():
 	playing = false
-	
+
 	grid.update_oxygen_level()
-	
+
 	var success : bool = grid.oxygen_level >= grid.target_oxygen_level
 	if TileGlobals.cur_testing_level:
 		_return_to_puzzle_editor(success)
 		return
-	
 	hud.show_level_over(success)
 
 func _return_to_puzzle_editor(success: bool):
 	TileGlobals.test_passed = success
-	get_tree().change_scene_to_packed(puzzle_editor_scene)
+	get_tree().change_scene_to_file("res://screens/puzzle_editor/puzzle_editor.tscn")

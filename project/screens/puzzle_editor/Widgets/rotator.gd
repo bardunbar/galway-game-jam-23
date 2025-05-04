@@ -1,4 +1,5 @@
 extends HBoxContainer
+class_name Rotator
 
 @export var label: String
 @export var min_value: int = 0
@@ -25,3 +26,7 @@ func _on_next_pressed() -> void:
 	cur_value = clamp(cur_value + increment, min_value, max_value)
 	value_label.text = str(cur_value)
 	on_value_changed.emit(cur_value)
+
+func set_value(new_value: int):
+	cur_value = clamp(new_value, min_value, max_value)
+	value_label.text = str(cur_value)
