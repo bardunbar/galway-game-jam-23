@@ -202,4 +202,6 @@ func import_from_resource(level_data : LevelDefinition) -> void:
 			cur_tile.set_tile_type(type)
 			
 	startingGridLocation = Vector2(level_data.start_location.x, level_data.start_location.y)
+	current_cycle = 0
+	target_cycle = level_data.time_until_humans / 100
 	
