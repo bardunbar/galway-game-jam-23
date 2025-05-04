@@ -118,8 +118,39 @@ func build_grid(width, height):
 			current_tiles[i].append(tile)
 			add_child(tile)
 
+func clear_grid():
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
+	current_tiles.clear()
+	grid_width = 0
+	grid_height = 0
+
 func get_grid_tile_width():
 	return grid_width * tile_size
 
 func get_grid_tile_height():
 	return grid_height * tile_size
+
+func export_to_resource(level_data : LevelDefinition = null) -> LevelDefinition:
+	if level_data == null:
+		level_data = LevelDefinition.new()
+	level_data.grid_height = grid_height
+	level_data.grid_width = grid_width
+	level_data.grid_data.resize(grid_height * grid_width)
+	for y in range(grid_height):
+		for x in range(grid_width):
+			level_data.grid_data[x + grid_height * grid_width] = current_tiles[x][y].current_state
+	
+	return level_data	
+
+func import_from_resource(level_data : LevelDefinition) -> void:
+	clear_grid()
+	build_grid(level_data.grid_width, level_data.grid_height)
+	
+	for y in range(grid_height):
+		for x in range(grid_width):
+			var type : TileGlobals.TILE_TYPE = level_data.grid_data[x + grid_height * grid_width]
+			var cur_tile : Tile = get_tile(x, y)
+			cur_tile
+	
