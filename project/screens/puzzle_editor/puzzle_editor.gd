@@ -36,7 +36,11 @@ func _on_test_button_pressed() -> void:
 
 func _on_save_button_pressed() -> void:
 	var resource = _generate_level()
-	var path : String = "res://resources/levels/%s.tres" % planet_name
+	var path : String 
+	if OS.has_feature("editor"):
+		path = "res://resources/levels/%s.tres" % planet_name
+	else:
+		path = "user://levels/%s.tres" % planet_name
 	var error := ResourceSaver.save(resource, path)
 	if error:
 		print("An error happened while saving data: ", error)
