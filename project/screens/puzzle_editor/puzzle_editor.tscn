@@ -37,6 +37,10 @@ focus_mode = 0
 text = "Test Puzzle
 "
 
+[node name="TestLabel" type="Label" parent="InterfaceLayer/VBoxContainer"]
+layout_mode = 2
+text = "Needs Testing"
+
 [node name="HSeparator" type="HSeparator" parent="InterfaceLayer/VBoxContainer"]
 layout_mode = 2
 

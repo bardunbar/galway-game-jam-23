@@ -16,6 +16,8 @@ extends Node2D
 @onready var grid_height_rotator:Rotator = $InterfaceLayer/VBoxContainer/GridHeight
 @onready var difficutly_rotator:Rotator = $InterfaceLayer/VBoxContainer/Difficulty
 @onready var time_until_humans_rotator:Rotator = $InterfaceLayer/VBoxContainer/TimeUntilHumans
+@onready var test_label:Label = $InterfaceLayer/VBoxContainer/TestLabel
+@onready var save_button:Button = %SaveButton
 
 var planet_name: String = "PlanetX"
 var grid_width: int = 1
@@ -25,6 +27,8 @@ var time_until_humans: int = 100
 var selected_tile: Tile
 var player_start_loc: Vector2 = Vector2(0, 0)
 var cur_tile_button: TileButton
+var test_passed = false
+var ignore_testing = true
 
 func _generate_level() -> LevelDefinition:
 	var level: LevelDefinition = grid.export_to_resource()
@@ -54,7 +58,14 @@ func _ready() -> void:
 	if TileGlobals.cur_testing_level != null:
 		_setup_level(TileGlobals.cur_testing_level)
 		TileGlobals.cur_testing_level = null
-		# TODO: check failure
+		test_passed = TileGlobals.test_passed
+		if test_passed:
+			test_label.text = "Test Passed"
+		else:
+			test_label.text = "Test Failed"
+	
+	if not ignore_testing:
+		save_button.disabled = not test_passed
 		
 	_update_grid()
 	grid.connect("on_mouse_entered_tile", _on_new_tile_selected)
@@ -115,6 +126,7 @@ func _on_tile_button_highlighted(tile_button:TileButton):
 		cur_tile_button.set_highlighted(false)
 	cur_tile_button = tile_button
 	selected_tile.set_tile_type(cur_tile_button.tile_type)
+	_mark_needs_testing()
 
 func _on_planet_name_text_submitted(new_text: String) -> void:
 	planet_name = new_text
@@ -141,18 +153,28 @@ func _setup_level(level: LevelDefinition):
 func _on_grid_width_value_changed(new_value: int) -> void:
 	grid_width = new_value
 	_update_grid()
+	_mark_needs_testing()
 
 func _on_grid_height_value_changed(new_value: int) -> void:
 	grid_height = new_value
 	_update_grid()
+	_mark_needs_testing()
 
 func _on_difficulty_value_changed(new_value: int) -> void:
 	difficulty = new_value
 
 func _on_time_until_humans_value_changed(new_value: int) -> void:
 	time_until_humans = new_value
+	_mark_needs_testing()
 
 func _on_is_player_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		player_start_loc = selected_tile.grid_position
 		_update_player_pos()
+		_mark_needs_testing()
+
+func _mark_needs_testing():
+	test_label.text = "Needs Testing"
+	test_passed = false
+	if not ignore_testing:
+		save_button.disabled = true
