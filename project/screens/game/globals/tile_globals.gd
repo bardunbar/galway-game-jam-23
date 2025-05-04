@@ -45,7 +45,7 @@ var tile_oxygen_scores: Dictionary[TILE_TYPE, float] = {
 }
  
 var levels = [
-	"Tutorial",
+	"Tutoria l",
 	"WalledInByTrees",
 	"FirstDig",
 	"FirstToxins",
