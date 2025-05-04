@@ -10,9 +10,9 @@ extends Node2D
 
 var game: GameScript
 var current_tiles: Array[Array]
-
 var oxygen_level: float = 0.0
 
+signal on_mouse_entered_tile(tile:Tile)
 signal oxygen_updated(new_oxygen_level: float)
 
 func make_random_tiles(num_tiles: int, tile_action: TileGlobals.TILE_TYPE):
@@ -133,6 +133,7 @@ func build_grid(width, height):
 				tile = current_tiles[i][j]
 			if tile == null:
 				tile = tile_class.instantiate() as Tile
+				tile.connect("on_mouse_entered_tile", _on_mouse_entered_tile)
 				current_tiles[i].append(tile)
 				add_child(tile)
 			tile.position.x = (tile_size * (j + 0.5))
@@ -158,6 +159,9 @@ func get_grid_tile_width():
 
 func get_grid_tile_height():
 	return grid_height * tile_size
+	
+func _on_mouse_entered_tile(tile:Tile):
+	on_mouse_entered_tile.emit(tile)
 
 func export_to_resource(level_data : LevelDefinition = null) -> LevelDefinition:
 	if level_data == null:

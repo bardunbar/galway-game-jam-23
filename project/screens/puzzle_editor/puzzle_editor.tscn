@@ -30,6 +30,9 @@ layout_mode = 2
 text = "Test Puzzle
 "
 
+[node name="HSeparator" type="HSeparator" parent="InterfaceLayer/VBoxContainer"]
+layout_mode = 2
+
 [node name="PlanetName" type="LineEdit" parent="InterfaceLayer/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Enter Planet Name"
@@ -62,6 +65,23 @@ label = "Time To Humans"
 min_value = 100
 max_value = 2000
 increment = 100
+
+[node name="TileOptionsContainer" type="VBoxContainer" parent="InterfaceLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -295.0
+offset_top = 24.0
+offset_right = -30.0
+offset_bottom = 635.0
+grow_horizontal = 0
+
+[node name="TileGrid" type="GridContainer" parent="InterfaceLayer/TileOptionsContainer"]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="InterfaceLayer/TileOptionsContainer"]
+layout_mode = 2
+text = "Player Here"
 
 [node name="Grid" parent="." instance=ExtResource("2_ajwto")]
 

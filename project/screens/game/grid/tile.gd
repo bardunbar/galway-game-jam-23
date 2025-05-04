@@ -1,5 +1,5 @@
 class_name Tile
-extends Node2D
+extends Area2D
 
 @onready var current_texture_component: Sprite2D = $CurrentTexture
 @onready var highlight_texture_component: Sprite2D = $HighlightTexture
@@ -21,6 +21,8 @@ var grid: Grid
 var grid_position: Vector2 = Vector2.ZERO
 var current_state: TileGlobals.TILE_TYPE
 var pending_actions: Array[TileGlobals.TILE_ACTION]
+
+signal on_mouse_entered_tile(tile:Tile)
 
 func blink() -> void:	
 	if pending_actions.find(TileGlobals.TILE_ACTION.TOXIC) != -1:
@@ -202,3 +204,7 @@ func _get_diagonal_tiles() -> Array[Tile]:
 	diagonal_tiles.append(grid.get_tile(int(grid_position.x - 1), int(grid_position.y + 1)))
 	
 	return diagonal_tiles
+
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event.is_action_pressed("mouse_down") and event is InputEventMouseButton:
+		on_mouse_entered_tile.emit(self)

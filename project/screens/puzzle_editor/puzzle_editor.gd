@@ -11,6 +11,7 @@ var grid_width: int = 1
 var grid_height: int = 1
 var difficulty: int = 1
 var time_until_humans: int = 100
+var last_hovered_tile: Tile
 
 func _on_test_button_pressed() -> void:
 	pass # Replace with function body.
@@ -26,11 +27,18 @@ func _on_save_button_pressed() -> void:
 func _ready() -> void:
 	grid.build_grid(grid_width, grid_height)
 	camera.zoom_to_fit(grid.get_grid_tile_width(), grid.get_grid_tile_height())
+	grid.connect("on_mouse_entered_tile", _on_mouse_entered_tile)
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_open_play_menu"):
 		interface_layer.add_child(play_menu.instantiate())
 		get_viewport().set_input_as_handled()
+		
+func _on_mouse_entered_tile(tile: Tile):
+	if last_hovered_tile != null:
+		last_hovered_tile.highlight_tile(false)
+	last_hovered_tile = tile
+	tile.highlight_tile(true)
 
 func _on_planet_name_text_submitted(new_text: String) -> void:
 	planet_name = new_text
